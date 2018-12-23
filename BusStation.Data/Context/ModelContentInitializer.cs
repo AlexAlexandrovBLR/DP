@@ -174,7 +174,26 @@ namespace BusStation.Data.Context
             };
             context.Ticketses.Add(ticket2);
 
+            flights1.Start = new List<BusStops> { busstops1 };
+            flights1.Stop = new List<BusStops> { busstops3 };
 
+            flights2.Start = new List<BusStops> { busstops1 };
+            flights2.Stop = new List<BusStops> { busstops2 };
+
+            flights3.Start = new List<BusStops> { busstops1 };
+            flights3.Stop = new List<BusStops> { busstops5 };
+
+            //orders1.IdFlightses = new List<Flights>
+
+            ticket1.StatusOrderses = new List<Orders> { orders2 };
+            ticket1.SurnameCustomerses = new List<Customers> { customers1 };
+            ticket1.TicketPrices = new List<Flights> { flights1 };
+            ticket1.FlightName = new List<Flights> { flights1 };
+
+            ticket2.StatusOrderses = new List<Orders> { orders2 };
+            ticket2.SurnameCustomerses = new List<Customers> { customers2 };
+            ticket2.TicketPrices = new List<Flights> { flights2 };
+            ticket2.FlightName = new List<Flights> { flights2 };
         }
     }
 }
