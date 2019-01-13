@@ -48,13 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\ModelContentInitializer.cs" />
-    <Compile Include="Context\ModelContext.cs" />
-    <Compile Include="Entities\BusStops.cs" />
-    <Compile Include="Entities\Customers.cs" />
-    <Compile Include="Entities\Flights.cs" />
-    <Compile Include="Entities\Orders.cs" />
-    <Compile Include="Entities\Tickets.cs" />
+    <Compile Include="Context\BusStationtInitializer.cs" />
+    <Compile Include="Context\BusStationContext.cs" />
+    <Compile Include="Entities\BusStop.cs" />
+    <Compile Include="Entities\Route.cs" />
+    <Compile Include="Entities\RouteStop.cs" />
+    <Compile Include="Entities\StatusOrder.cs" />
+    <Compile Include="Entities\TimeTable.cs" />
+    <Compile Include="Entities\TypeStop.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

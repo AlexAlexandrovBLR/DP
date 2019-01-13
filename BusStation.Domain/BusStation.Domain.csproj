@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,7 +48,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainServices\UnitOfWorkService.cs" />
+    <Compile Include="Interfaces\IGenericBaseService.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BusStopsRepository.cs" />
+    <Compile Include="Repositories\OrdersRepository.cs" />
+    <Compile Include="Repositories\RoutesRepository.cs" />
+    <Compile Include="Repositories\RouteStopsRepository.cs" />
+    <Compile Include="Repositories\StatusOrdersRepository.cs" />
+    <Compile Include="Repositories\TimeTablesRepository.cs" />
+    <Compile Include="Repositories\TypeStopsRepository.cs" />
+    <Compile Include="Repositories\UsersRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusStation.Common\BusStation.Common.csproj">
+      <Project>{732dbc0f-d6f7-46a2-a85e-174eac017245}</Project>
+      <Name>BusStation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusStation.Data\BusStation.Data.csproj">
+      <Project>{2aaa84a2-3fc4-4468-b0ae-1d7771e9b190}</Project>
+      <Name>BusStation.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

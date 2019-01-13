@@ -1,0 +1,17 @@
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Domain.dll.config
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Domain.dll
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Domain.pdb
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Common.dll
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Data.dll
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\EntityFramework.dll
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\EntityFramework.SqlServer.dll
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Common.pdb
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Data.pdb
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\BusStation.Data.dll.config
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\EntityFramework.xml
+E:\Projects\DP\DP\BusStation.Domain\bin\Debug\EntityFramework.SqlServer.xml
+E:\Projects\DP\DP\BusStation.Domain\obj\Debug\BusStation.Domain.csprojAssemblyReference.cache
+E:\Projects\DP\DP\BusStation.Domain\obj\Debug\BusStation.Domain.csproj.CoreCompileInputs.cache
+E:\Projects\DP\DP\BusStation.Domain\obj\Debug\BusStation.Domain.csproj.CopyComplete
+E:\Projects\DP\DP\BusStation.Domain\obj\Debug\BusStation.Domain.dll
+E:\Projects\DP\DP\BusStation.Domain\obj\Debug\BusStation.Domain.pdb

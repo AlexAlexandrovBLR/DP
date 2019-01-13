@@ -1,0 +1,12 @@
+E:\Projects\DP\DP\BusStation.Data\bin\Debug\BusStation.Data.dll.config
+E:\Projects\DP\DP\BusStation.Data\bin\Debug\BusStation.Data.dll
+E:\Projects\DP\DP\BusStation.Data\bin\Debug\BusStation.Data.pdb
+E:\Projects\DP\DP\BusStation.Data\bin\Debug\EntityFramework.dll
+E:\Projects\DP\DP\BusStation.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\Projects\DP\DP\BusStation.Data\bin\Debug\EntityFramework.xml
+E:\Projects\DP\DP\BusStation.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\Projects\DP\DP\BusStation.Data\obj\Debug\BusStation.Data.csprojAssemblyReference.cache
+E:\Projects\DP\DP\BusStation.Data\obj\Debug\BusStation.Data.csproj.CoreCompileInputs.cache
+E:\Projects\DP\DP\BusStation.Data\obj\Debug\BusStation.Data.csproj.CopyComplete
+E:\Projects\DP\DP\BusStation.Data\obj\Debug\BusStation.Data.dll
+E:\Projects\DP\DP\BusStation.Data\obj\Debug\BusStation.Data.pdb

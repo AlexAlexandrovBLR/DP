@@ -1,0 +1,6 @@
+E:\Projects\DP\DP\BusStation.Common\bin\Debug\BusStation.Common.dll
+E:\Projects\DP\DP\BusStation.Common\bin\Debug\BusStation.Common.pdb
+E:\Projects\DP\DP\BusStation.Common\obj\Debug\BusStation.Common.csprojAssemblyReference.cache
+E:\Projects\DP\DP\BusStation.Common\obj\Debug\BusStation.Common.csproj.CoreCompileInputs.cache
+E:\Projects\DP\DP\BusStation.Common\obj\Debug\BusStation.Common.dll
+E:\Projects\DP\DP\BusStation.Common\obj\Debug\BusStation.Common.pdb
