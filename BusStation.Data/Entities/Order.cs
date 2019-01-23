@@ -13,8 +13,8 @@ namespace BusStation.Data.Entities
         public int UserId { get; set; }
         public int StatusOrderId { get; set; }
 
-        public Route Route { get; set; }
-        public User User { get; set; }
-        public StatusOrder StatusOrder { get; set; }
+        public virtual Route Route { get; set; }
+        public virtual User User { get; set; }
+        public virtual StatusOrder StatusOrder { get; set; }
     }
 }

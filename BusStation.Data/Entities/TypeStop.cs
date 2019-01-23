@@ -8,14 +8,9 @@ namespace BusStation.Data.Entities
 {
     public class TypeStop
     {
-        public TypeStop()
-        {
-            RouteStops=new List<RouteStop>();
-        }
-
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<RouteStop> RouteStops { get; set; }
+        public virtual ICollection<RouteStop> RouteStops { get; set; } = new List<RouteStop>();
     }
 }

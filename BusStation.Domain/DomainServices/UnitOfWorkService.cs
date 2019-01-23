@@ -49,6 +49,8 @@ namespace BusStation.Domain.DomainServices
         public IGenericBaseService<User> UsersRepository => 
             _usersRepository ?? new UsersRepository(_busStationContext);
 
+        public BusStationContext Context => _busStationContext;
+
         public void Save()
         {
             _busStationContext.SaveChanges();

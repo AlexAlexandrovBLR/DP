@@ -8,14 +8,9 @@ namespace BusStation.Data.Entities
 {
     public class StatusOrder
     {
-        public StatusOrder()
-        {
-            Orders=new List<Order>();
-        }
-
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

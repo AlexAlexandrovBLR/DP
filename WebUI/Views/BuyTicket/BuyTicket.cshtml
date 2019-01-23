@@ -1,0 +1,37 @@
+﻿@model BusStation.Services.Models.BuyTicketViewModel
+
+
+@{
+    ViewBag.Title = "BuyTicket";
+}
+
+<style>
+    .thead-light {
+        background-color: cornflowerblue
+    }
+</style>
+
+<h2 align="center">Покупка билетов</h2>
+
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Откуда</th>
+        <th scope="col">Куда</th>
+        <th scope="col">Дата и время</th>
+        <th scope="col">Количество</th>
+        <th scope="col">Стоимость</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.DepartureStop</td>
+            <td>@Model.ArrivalStop</td>
+            <td>@Model.DepartureDate.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>@Model.Quantity</td>
+            <td>@Model.Amount</td>
+        </tr>
+    </tbody>
+</table>
+
+@Html.Partial("BuyTicketForm", Model)

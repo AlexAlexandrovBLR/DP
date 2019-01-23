@@ -8,11 +8,6 @@ namespace BusStation.Data.Entities
 {
     public class User
     {
-        public User()
-        {
-            TimeTables=new List<TimeTable>();
-        }
-
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,6 +15,6 @@ namespace BusStation.Data.Entities
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        public ICollection<TimeTable> TimeTables { get; set; }
+        public virtual ICollection<TimeTable> TimeTables { get; set; } = new List<TimeTable>();
     }
 }

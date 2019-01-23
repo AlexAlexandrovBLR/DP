@@ -20,6 +20,7 @@ namespace BusStation.Services.Ninject
             //registration bindings
             Bind<IUnitOfWork>().To<UnitOfWorkService>().WithConstructorArgument(_connectionString);
             Bind<IGetRouteService>().To<GetRouteService>();
+            Bind<ISearchService>().To<SearchServise>();
         }
     }
 }

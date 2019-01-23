@@ -76,12 +76,14 @@ namespace BusStation.Data.Context
                 RouteNumber = 3,
                 NumberOfSeats = 36,
                 Price = 16
-            }; Route routeNumFour = new Route
+            };
+            Route routeNumFour = new Route
             {
                 RouteNumber = 4,
                 NumberOfSeats = 30,
                 Price = 12
-            }; Route routeNumFive = new Route
+            };
+            Route routeNumFive = new Route
             {
                 RouteNumber = 5,
                 NumberOfSeats = 18,
@@ -188,6 +190,21 @@ namespace BusStation.Data.Context
                 routeGomelDeparture,
                 routeGomelArrival
             });
+
+            TimeTable timeTableGrodno = new TimeTable
+            {
+                Arrival = DateTime.Now.AddHours(4),
+                Departure = DateTime.Now
+            };
+
+            TimeTable timeTableGrodnoTwo = new TimeTable
+            {
+                Arrival = DateTime.Now.AddHours(7),
+                Departure = DateTime.Now.AddHours(5)
+            };
+
+            routeNumTwo.TimeTables.Add(timeTableGrodno);
+            routeNumTwo.TimeTables.Add(timeTableGrodnoTwo);
 
             context.SaveChanges();
         }

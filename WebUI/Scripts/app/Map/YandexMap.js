@@ -15,6 +15,7 @@ function init() {
             zoom: 7
         });
     geoMap.controls.remove('searchControl');
+    geoMap.behaviors.disable('scrollZoom');
     getRoutes(geoMap);
 }
 

@@ -1,9 +1,12 @@
-﻿using BusStation.Data.Entities;
+﻿using BusStation.Data.Context;
+using BusStation.Data.Entities;
 
 namespace BusStation.Domain.Interfaces
 {
     public interface IUnitOfWork
     {
+        BusStationContext Context { get; }
+
         IGenericBaseService<BusStop> BusStopsRepository { get;}
         IGenericBaseService<Order> OrdersRepository { get; }
         IGenericBaseService<Route> RoutesRepository { get; }

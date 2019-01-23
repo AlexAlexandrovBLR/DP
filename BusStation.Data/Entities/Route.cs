@@ -9,20 +9,13 @@ namespace BusStation.Data.Entities
 {
     public class Route
     {
-        public Route()
-        {
-            Orders=new List<Order>();
-            RouteStops=new List<RouteStop>();
-            TimeTables=new List<TimeTable>();
-        }
-
         public int Id { get; set; }
         public int RouteNumber { get; set; }
         public int NumberOfSeats { get; set; }
         public decimal Price { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
-        public ICollection<RouteStop> RouteStops { get; set; }
-        public ICollection<TimeTable> TimeTables { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<RouteStop> RouteStops { get; set; } = new List<RouteStop>();
+        public virtual ICollection<TimeTable> TimeTables { get; set; } = new List<TimeTable>();
     }
 }
