@@ -17,6 +17,7 @@ namespace BusStation.Domain.DomainServices
         private TimeTablesRepository _timeTablesRepository;
         private TypeStopsRepository _typeStopsRepository;
         private UsersRepository _usersRepository;
+        private RolesRepository _rolesRepository;
 
         private readonly BusStationContext _busStationContext;
 
@@ -50,6 +51,10 @@ namespace BusStation.Domain.DomainServices
             _usersRepository ?? new UsersRepository(_busStationContext);
 
         public BusStationContext Context => _busStationContext;
+
+        public IGenericBaseService<Role> RolesRepository =>
+            _rolesRepository ?? new RolesRepository(_busStationContext);
+        
 
         public void Save()
         {

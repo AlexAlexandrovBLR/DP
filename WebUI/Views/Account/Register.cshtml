@@ -1,40 +1,75 @@
-﻿@model WebUI.Models.RegisterViewModel
+﻿@model BusStation.Services.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<style>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+    .text-on-pannel {
+        background: #fff none repeat scroll 0 0;
+        height: auto;
+        margin-left: 20px;
+        padding: 3px 5px;
+        position: absolute;
+        margin-top: -47px;
+        border: 1px solid #337ab7;
+        border-radius: 8px;
+    }
+
+    .panel {
+        /* for text on pannel */
+        margin-top: 27px !important;
+    }
+
+    .panel-body {
+        padding-top: 30px !important;
+    }
+
+</style>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <h4 class="text-on-pannel text-primary"><strong class="text-uppercase">Регистрация нового пользователя</strong></h4>
+
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-5 control-label" })
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-5 control-label" })
+                        <div class="col-md-7">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-5 control-label" })
+                        <div class="col-md-7">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" align="right">
+                            <input type="submit" class="btn btn-info" value="Зарегистрировать" />
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        }
+
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+    <div class="col-md-3"></div>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

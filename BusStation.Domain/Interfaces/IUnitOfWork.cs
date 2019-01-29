@@ -15,5 +15,8 @@ namespace BusStation.Domain.Interfaces
         IGenericBaseService<TimeTable> TimeTablesRepository { get; }
         IGenericBaseService<TypeStop> TypeStopsRepository { get; }
         IGenericBaseService<User> UsersRepository { get; }
+        IGenericBaseService<Role> RolesRepository { get; }
+
+        void Save();
     }
 }

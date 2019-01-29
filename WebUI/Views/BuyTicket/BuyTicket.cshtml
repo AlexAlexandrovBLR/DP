@@ -27,11 +27,11 @@
         <tr>
             <td>@Model.DepartureStop</td>
             <td>@Model.ArrivalStop</td>
-            <td>@Model.DepartureDate.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>@Model.DepartureDate.ToString("dd.MM.yyyy") @Model.DepartureDate.ToString("t")</td>
             <td>@Model.Quantity</td>
             <td>@Model.Amount</td>
         </tr>
     </tbody>
 </table>
 
-@Html.Partial("BuyTicketForm", Model)
+@Html.Partial("_BuyTicketForm", Model)

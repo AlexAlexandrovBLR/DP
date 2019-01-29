@@ -1,0 +1,32 @@
+﻿@model  BusStation.Services.Models.TimeTableViewModel
+
+
+<div class="well">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-2">
+                @Html.LabelFor(l => l.DepartureStop, Model.DepartureStop)
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(l => l.ArrivalStop, Model.ArrivalStop)
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(l => l.DepartureDate, Model.DepartureDate.ToString("dd.MM.yyyy"))
+            </div>
+            <div class="col-md-1">
+                <label>
+                    @Html.LabelFor(l => l.DepartureDate, Model.DepartureDate.ToString("t"))
+                </label>
+            </div>
+            <div class="col-md-1">
+                <label>
+                    @Html.LabelFor(l => l.Seats, Model.Seats.ToString())
+                </label>
+            </div>
+            <div class="col-md-1">
+                @Html.LabelFor(l => l.Price, Model.Price.ToString("F"))
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+﻿@model BusStation.Services.Models.BuyTicketViewModel
+
+<style>
+
+     .text-on-pannel {
+         background: #fff none repeat scroll 0 0;
+         height: auto;
+         margin-left: 20px;
+         padding: 3px 5px;
+         position: absolute;
+         margin-top: -47px;
+         border: 1px solid #337ab7;
+         border-radius: 8px;
+     }
+
+    .panel {
+        /* for text on pannel */
+        margin-top: 27px !important;
+    }
+
+    .panel-body {
+        padding-top: 30px !important;
+    }
+
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" align="center">
+                @using (Html.BeginForm("Checkout", "BuyTicket", FormMethod.Post, new { role = "form" }))
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h3 class="text-on-pannel text-primary"><strong class="text-uppercase"> Платежные данные </strong></h3>
+                            <div class="form-group">
+                                @Html.LabelFor(l => l.FirstName)
+                                @Html.TextBoxFor(t => t.FirstName, new { @class = "form-control", placeholder = "Введите фамилию" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(l => l.LastName)
+                                @Html.TextBoxFor(t => t.LastName, new { @class = "form-control", placeholder = "Введите имя" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(l => l.PassportNumber)
+                                @Html.TextBoxFor(t => t.PassportNumber, new { @class = "form-control", placeholder = "Введите серию и номер паспорта" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(l => l.CardNumber)
+                                @Html.TextBoxFor(t => t.CardNumber, new { @class = "form-control", placeholder = "Введите номер платежной карты" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(l => l.ValidityPeriod)
+                                @Html.TextBoxFor(t => t.ValidityPeriod, new { @class = "form-control", placeholder = "Введите срок действия платежной карты" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(l => l.Cvv)
+                                @Html.TextBoxFor(t => t.Cvv, new { @class = "form-control", placeholder = "Введите CVV код платежной карты (3 цифры с обратной стороны)" })
+                            </div>
+
+                            <button type="submit" class="btn btn-info">Оплатить</button>
+                        </div>
+                    </div>
+                }
+            </div>
+           
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
+

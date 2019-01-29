@@ -51,6 +51,7 @@
     <Compile Include="Context\BusStationtInitializer.cs" />
     <Compile Include="Context\BusStationContext.cs" />
     <Compile Include="Entities\BusStop.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Route.cs" />
     <Compile Include="Entities\RouteStop.cs" />
     <Compile Include="Entities\StatusOrder.cs" />

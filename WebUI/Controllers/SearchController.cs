@@ -19,7 +19,7 @@ namespace WebUI.Controllers
         public ActionResult Index()
         {
             var model=new SearchRouteFilterModel();
-            return PartialView("SearchRouteForm", model);
+            return PartialView("_SearchRouteForm", model);
         }
         
         public ActionResult Search(SearchRouteFilterModel filter, int page = 1)

@@ -40,22 +40,32 @@
             Стоимость
         </label>
     </div>
-    <div class="col-md-1">
-        <label>
-            Количество
-        </label>
-    </div>
-    <div class="col-md-1">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="col-md-1">
+            <label>
+                Количество
+            </label>
+        </div>
+        <div class="col-md-1">
         
-    </div>
+        </div>
+    }
 </div>
 
 @if (Model.TimeTableViewModels!=null && Model.TimeTableViewModels.Any())
 {
-     foreach (var timeTable in Model.TimeTableViewModels)
-     {
-         @Html.Partial("SearchSummary", timeTable)
-     }
+    foreach (var timeTable in Model.TimeTableViewModels)
+    {
+        if (Request.IsAuthenticated)
+        {
+            @Html.Partial("_SearchSummary", timeTable)
+        }
+        else
+        {
+            @Html.Partial("_SearchSummaryNoAuth", timeTable)
+        }
+    }
     <div class="pager">
         @Html.PageLinks(Model.PagingInfo, x => Url.Action("Search", new { Page = x}))
     </div>

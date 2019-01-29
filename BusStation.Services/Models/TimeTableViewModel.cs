@@ -19,7 +19,7 @@ namespace BusStation.Services.Models
         public DateTime DepartureDate { get; set; }
         public decimal Price { get; set; }
         public int Seats { get; set; }
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } = 1;
         [DisplayName("Стоимость")]
         public decimal Amount { get; set; }
         public int TypeStopId { get; set; }

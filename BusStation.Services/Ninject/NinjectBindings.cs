@@ -21,6 +21,7 @@ namespace BusStation.Services.Ninject
             Bind<IUnitOfWork>().To<UnitOfWorkService>().WithConstructorArgument(_connectionString);
             Bind<IGetRouteService>().To<GetRouteService>();
             Bind<ISearchService>().To<SearchServise>();
+            Bind<IAccountService>().To<AccountService>();
         }
     }
 }

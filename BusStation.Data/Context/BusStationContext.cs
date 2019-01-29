@@ -28,5 +28,6 @@ namespace BusStation.Data.Context
         public DbSet<TimeTable> TimeTables { get; set; }
         public DbSet<TypeStop> TypeStops { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }

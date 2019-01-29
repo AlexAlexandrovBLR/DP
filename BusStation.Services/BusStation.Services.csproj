@@ -82,7 +82,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\RoleTypeEnum.cs" />
     <Compile Include="Enums\TypeStopEnum.cs" />
+    <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="Interfaces\IGetRouteService.cs" />
     <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Models\BuyTicketViewModel.cs" />
@@ -91,15 +93,22 @@
     <Compile Include="Models\Dto\TimeTableModelDto.cs" />
     <Compile Include="Models\InputModels\SearchRouteFilterModel.cs" />
     <Compile Include="Models\ListTimeTableViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\TimeTableViewModel.cs" />
     <Compile Include="Ninject\NinjectBindings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\GetRouteService.cs" />
     <Compile Include="Services\SearchServise.cs" />
     <Compile Include="Services\TimeTableService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusStation.Common\BusStation.Common.csproj">
+      <Project>{732dbc0f-d6f7-46a2-a85e-174eac017245}</Project>
+      <Name>BusStation.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusStation.Data\BusStation.Data.csproj">
       <Project>{2AAA84A2-3FC4-4468-B0AE-1D7771E9B190}</Project>
       <Name>BusStation.Data</Name>
