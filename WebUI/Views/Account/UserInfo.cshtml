@@ -1,0 +1,109 @@
+﻿@model BusStation.Services.Models.UserViewModel
+
+@{
+    ViewBag.Title = "UserInfo";
+}
+
+<div id="result">
+
+</div>
+
+@using (Ajax.BeginForm("SaveUserInfo", "Account", null, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result"}, new {@class="well form-horizontal" }))
+{
+    @Html.HiddenFor(h=>h.Id);
+
+<fieldset>
+    <legend>Личный кабинет</legend>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.FirstName, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                @Html.TextBoxFor(t => t.FirstName, new { @class = "form-control", placeholder = "Имя" })
+            </div>
+        </div>
+    </div>
+
+<div class="form-group">
+    @Html.LabelFor(l => l.LastName, new { @class = "col-md-4 control-label" })
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            @Html.TextBoxFor(t => t.LastName, new { @class = "form-control", placeholder = "Фамилия" })
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(l => l.RoleName, new { @class = "col-md-4 control-label" })
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            @Html.TextBoxFor(t => t.RoleName, new { @class = "form-control", disabled="disabled" })
+        </div>
+    </div>
+</div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.DateOfBirth, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                @Html.TextBoxFor(t => t.DateOfBirth, new { @class = "form-control", type = "date" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.Phone, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                @Html.TextBoxFor(t => t.Phone, new { @class = "form-control", placeholder = "(029)555-12-12", id="phone" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.City, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                @Html.TextBoxFor(t => t.City, new { @class = "form-control", placeholder = "Город" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.ZipCode, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                @Html.TextBoxFor(t => t.ZipCode, new { @class = "form-control", placeholder = "Индекс" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.Address, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                @Html.TextBoxFor(t => t.Address, new { @class = "form-control", placeholder = "Адрес" })
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-warning">Сохранить <span class="glyphicon glyphicon-send"></span></button>
+        </div>
+    </div>
+
+</fieldset>
+}
+
+@section scripts
+{
+    <script>
+        $('#phone').inputmask({ "mask": "(999) 999-99-99" });
+    </script>
+}

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusStation.Common;
 using BusStation.Data.Entities;
 using BusStation.Domain.Interfaces;
 using BusStation.Services.Enums;
@@ -47,6 +45,56 @@ namespace BusStation.Services.Services
             string hashedPassword = _unitOfWork.UsersRepository.GetAll().FirstOrDefault(f => f.Email == model.Email)?.Password;
 
             return hashedPassword;
+        }
+
+        public UserViewModel GetUserInfo(string userName)
+        {
+            User user = _unitOfWork.UsersRepository.GetAll().FirstOrDefault(f=>f.Email==userName);
+            if (user != null)
+            {
+                return new UserViewModel
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    RoleName = user.Role.Name,
+                    Address = user.Address,
+                    City = user.City,
+                    ZipCode = user.ZipCode,
+                    DateOfBirth = user.DateOfBirth,
+                    Phone = user.Phone
+                };
+            }
+
+            return null;
+        }
+
+        public OperationResult SaveUserInfo(UserViewModel model)
+        {
+            try
+            {
+                User user = _unitOfWork.UsersRepository.GetById(model.Id);
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Address = model.Address;
+                user.City = model.City;
+                user.ZipCode = model.ZipCode;
+                user.DateOfBirth = model.DateOfBirth;
+                user.Phone = model.Phone;
+                OperationResult result=_unitOfWork.UsersRepository.Update(user);
+                _unitOfWork.Save();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new OperationResult
+                {
+                    Successed = false,
+                    Message = e.Message
+                };
+            }
         }
     }
 }

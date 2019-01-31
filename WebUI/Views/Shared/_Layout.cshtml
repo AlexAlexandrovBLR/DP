@@ -48,7 +48,7 @@
                     <li class="sidebar-brand">
                         @Html.ActionLink("Автобусные пассажирские перевозки", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
                     </li>
-                    <li>
+                    @*<li>
                         <a href="#">Home</a>
                     </li>
                     <li>
@@ -73,9 +73,9 @@
                     </li>
                     <li>
                         <a href="#">Services</a>
-                    </li>
+                    </li>*@
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="/Account/UserInfo">Личный кабинет</a>
                     </li>
                     <li>
                         <a href="/Account/LogOff">Выйти</a>
@@ -120,7 +120,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/fancymenu")
-
+<script src="https://rawgit.com/RobinHerbots/Inputmask/4.x/dist/jquery.inputmask.bundle.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
