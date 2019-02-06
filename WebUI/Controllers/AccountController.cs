@@ -98,6 +98,8 @@ namespace WebUI.Controllers
         [HttpGet]
         public ActionResult UserInfo()
         {
+            var t = Roles.Enabled;
+
             UserViewModel model=null;
             if (Request.IsAuthenticated)
             {

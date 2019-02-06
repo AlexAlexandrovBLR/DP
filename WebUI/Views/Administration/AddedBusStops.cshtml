@@ -1,0 +1,33 @@
+﻿@model BusStation.Services.Models.SaveBusStopsViewModel
+
+
+@{
+    ViewBag.Title = "SuccessAddedBusStops";
+}
+
+@if (Model.SuccessSaved.Any())
+{
+     if (!Model.FailSaved.Any())
+     {
+         <h2 align="center">Данные сохранены успешно!</h2>
+     }
+     else
+     {
+         <h2 align="center">Часть данных сохранено успешно!</h2>
+     }
+
+    <p align="center">Успешно сохранены автобусные остановки: <b>@string.Join(", ", Model.SuccessSaved)</b></p>
+    <p></p>
+    if (Model.FailSaved.Any())
+    {
+        <p align="center">Не сохранены автобусные остановки так как уже существуют: <b>@string.Join(", ", Model.FailSaved)</b> </p>
+
+    }
+}
+else
+{
+    <h2 align="center">При сохранении данных возникла ошибка или текущие данные уже существуют.</h2>
+}
+<p></p>
+<p align="center">Вы можете вернуться <b>@Html.ActionLink("на страницу добавления автобусных остановок", "AddNewStops")</b> или <b>@Html.ActionLink("на главную страницу", "Index", "Home")</b></p>
+

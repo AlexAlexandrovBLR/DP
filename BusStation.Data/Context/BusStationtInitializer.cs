@@ -206,8 +206,18 @@ namespace BusStation.Data.Context
             routeNumTwo.TimeTables.Add(timeTableGrodno);
             routeNumTwo.TimeTables.Add(timeTableGrodnoTwo);
 
-            context.Roles.Add(new Role { Name = "Admin" });
+            var roleAdmin = new Role {Name = "Admin"};
+
+            context.Roles.Add(roleAdmin);
             context.Roles.Add(new Role { Name = "User" });
+
+            context.Users.Add(new User
+            {
+                Email = "admin@admin.com",
+                Password = "AOuWU2uXEY7LEJGczeF5LR2d33ngJk4D3Hzg2IoFu8jBnIbseTs0zC+iLiC7s/Vkuw==",
+                Role = roleAdmin
+            });
+
 
             context.SaveChanges();
         }

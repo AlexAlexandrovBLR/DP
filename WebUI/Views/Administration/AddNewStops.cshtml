@@ -1,0 +1,92 @@
+﻿@model BusStation.Services.Models.BusStopViewModel
+
+
+@{
+    ViewBag.Title = "AddNewStops";
+}
+
+<h2 align="center">Добавление новых автобусных остановок</h2>
+
+@using (Html.BeginForm("AddNewStops", "Administration", FormMethod.Post, new {@class = "form-horizontal", id="addForm"}))
+{
+    <div id="dynamicFields">
+        <div class="well" id="fields">
+            <div class="form-group">
+                @Html.LabelFor(l => l.BusStops[0].Name, new {@class = "col-md-1 control-label"})
+                <div class="col-md-2">
+                    @Html.TextBoxFor(t => t.BusStops[0].Name, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.BusStops[0].Description, new {@class = "col-md-1 control-label"})
+                <div class="col-md-2">
+                    @Html.TextBoxFor(t => t.BusStops[0].Description, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.BusStops[0].Latitude, new {@class = "col-md-1 control-label"})
+                <div class="col-md-2">
+                    @Html.TextBoxFor(t => t.BusStops[0].Latitude, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.BusStops[0].Longitude, new {@class = "col-md-1 control-label"})
+                <div class="col-md-2">
+                    @Html.TextBoxFor(t => t.BusStops[0].Longitude, new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <button type="button" class="btn btn-default" id="addField" >Добавить </button>
+    <button type="button" class="btn btn-danger" id="removeField" disabled="disabled">Удалить </button>
+
+    <button type="submit" class="btn btn-info">Сохранить</button>
+}
+    
+@section scripts
+{
+    <script>
+        var originalFields;
+        var i = 1;
+        $(document).ready(function() {
+            originalFields = $('#dynamicFields').clone();
+            //addIndexToAttribute($('#fields'));
+        });
+
+        $('#addField').on('click',
+            function() {
+                var fields = $(originalFields).clone();
+                addIndexToAttribute(fields);
+                $('#dynamicFields').append(fields.html());
+                $('#removeField').removeAttr('disabled');
+            });
+
+        $('#removeField').on('click',
+            function () {
+
+                var fields = $('#dynamicFields .well');
+                var length = fields.length;
+
+                if (fields.length > 1) {
+                    $(fields).last().remove();
+                    length--;
+                }
+                if (fields.length ===2) {
+                    $('#removeField').attr('disabled', 'disabled');
+                }
+
+            });
+
+        function addIndexToAttribute(originalFields) {
+            originalFields.find('input').each(function () {
+
+                var namePaths = $(this).attr('name').split(/\[[0 - 9]]/);
+                var idPaths = $(this).attr('id').split(/[0-9]/);
+
+
+                $(this).attr('name', namePaths[0] + '[' + i + ']' + namePaths[1]);
+                $(this).attr('id', idPaths[0] +  i +  idPaths[1]);
+            });
+
+            i++;
+        }
+
+
+    </script>
+}

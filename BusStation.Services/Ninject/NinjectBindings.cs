@@ -22,6 +22,7 @@ namespace BusStation.Services.Ninject
             Bind<IGetRouteService>().To<GetRouteService>();
             Bind<ISearchService>().To<SearchServise>();
             Bind<IAccountService>().To<AccountService>();
+            Bind<IAdministrationService>().To<AdministrationService>();
         }
     }
 }
