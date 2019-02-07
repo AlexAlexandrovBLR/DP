@@ -1,0 +1,82 @@
+﻿@model BusStation.Services.Models.UpdateBusStopsViewModel
+
+
+@{
+    ViewBag.Title = "UpdateBusStops";
+}
+
+<h2 align="center">Редактирование автобусных остановок</h2>
+
+
+<div class="well">
+    <label class="col-md-3 control-label">
+        <b>Выберите автобусную остановку:</b>
+    </label>
+    @Html.DropDownListFor(d => d.Id, Model.BusStops, new {@class = "form-control", id="selectStop" })
+</div>
+
+<form class="form-horizontal">
+    <div class="well" id="fields">
+        @Html.HiddenFor(h=>h.Id)
+        <div class="form-group">
+            @Html.LabelFor(l => l.Name, new {@class = "col-md-1 control-label"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(t => t.Name, new {@class = "form-control"})
+            </div>
+            @Html.LabelFor(l => l.Description, new {@class = "col-md-1 control-label"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(t => t.Description, new {@class = "form-control"})
+            </div>
+            @Html.LabelFor(l => l.Latitude, new {@class = "col-md-1 control-label"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(t => t.Latitude, new {@class = "form-control"})
+            </div>
+            @Html.LabelFor(l => l.Longitude, new {@class = "col-md-1 control-label"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(t => t.Longitude, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+    
+    <button type="button" id="editBtn" class="btn btn-info" style="float: right">Редактировать</button>
+</form>
+
+@section scripts
+{
+    <script>
+        $('#selectStop').on('change', function() {
+            $.ajax({
+                url: '/Administration/GetBusStopDetails',
+                type: 'POST',
+                data: {
+                    id: $('#selectStop').val()
+                },
+                success: function (data) {
+                    $('#Id').val(data.Id);
+                    $('#Name').val(data.Name);
+                    $('#Description').val(data.Description);
+                    $('#Latitude').val(data.Latitude);
+                    $('#Longitude').val(data.Longitude);
+                }
+            });
+        })
+
+        $('#editBtn').on('click', function() {
+            $.ajax({
+                url: '/Administration/SaveChangeBusStop',
+                type: 'POST',
+                data: {
+                    Id: $('#Id').val(),
+                    Name: $('#Name').val(),
+                    Description:$('#Description').val(),
+                    Latitude: $('#Latitude').val().replace('.',','),
+                    Longitude: $('#Longitude').val().replace('.', ',')
+                },
+                success: function (data) {
+                    debugger;
+                }
+            });
+        })
+
+    </script>
+}

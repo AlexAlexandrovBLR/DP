@@ -304,6 +304,7 @@
     <Content Include="Views\Account\_SaveUserInfoResultError.cshtml" />
     <Content Include="Views\Administration\AddNewStops.cshtml" />
     <Content Include="Views\Administration\AddedBusStops.cshtml" />
+    <Content Include="Views\Administration\UpdateBusStops.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

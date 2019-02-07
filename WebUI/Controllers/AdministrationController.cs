@@ -33,5 +33,30 @@ namespace WebUI.Controllers
 
             return View("AddedBusStops", result);
         }
+
+        [HttpGet]
+        public ActionResult UpdateBusStops()
+        {
+            var model = new UpdateBusStopsViewModel
+            {
+                BusStops = _administrationService.GetAllBusStopsName()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult GetBusStopDetails(int id)
+        {
+            var result = _administrationService.GetBusStopDetails(id);
+
+            return Json(result);
+        }
+
+        public ActionResult SaveChangeBusStop(BusStopDetailsViewModel model)
+        {
+            return null;
+        }
+
     }
 }
