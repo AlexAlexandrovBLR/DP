@@ -44,39 +44,49 @@
 @section scripts
 {
     <script>
-        $('#selectStop').on('change', function() {
-            $.ajax({
-                url: '/Administration/GetBusStopDetails',
-                type: 'POST',
-                data: {
-                    id: $('#selectStop').val()
-                },
-                success: function (data) {
-                    $('#Id').val(data.Id);
-                    $('#Name').val(data.Name);
-                    $('#Description').val(data.Description);
-                    $('#Latitude').val(data.Latitude);
-                    $('#Longitude').val(data.Longitude);
-                }
+        $('#selectStop').on('change',
+            function() {
+                $.ajax({
+                    url: '/Administration/GetBusStopDetails',
+                    type: 'POST',
+                    data: {
+                        id: $('#selectStop').val()
+                    },
+                    success: function(data) {
+                        $('#Id').val(data.Id);
+                        $('#Name').val(data.Name);
+                        $('#Description').val(data.Description);
+                        $('#Latitude').val(data.Latitude);
+                        $('#Longitude').val(data.Longitude);
+                    }
+                });
             });
-        })
 
-        $('#editBtn').on('click', function() {
-            $.ajax({
-                url: '/Administration/SaveChangeBusStop',
-                type: 'POST',
-                data: {
-                    Id: $('#Id').val(),
-                    Name: $('#Name').val(),
-                    Description:$('#Description').val(),
-                    Latitude: $('#Latitude').val().replace('.',','),
-                    Longitude: $('#Longitude').val().replace('.', ',')
-                },
-                success: function (data) {
-                    debugger;
-                }
+        $('#selectStop').change();
+
+        $('#editBtn').on('click',
+            function() {
+                $.ajax({
+                    url: '/Administration/SaveChangeBusStop',
+                    type: 'POST',
+                    data: {
+                        Id: $('#Id').val(),
+                        Name: $('#Name').val(),
+                        Description: $('#Description').val(),
+                        Latitude: $('#Latitude').val().replace('.', ','),
+                        Longitude: $('#Longitude').val().replace('.', ',')
+                    },
+                    success: function(data) {
+                        if (data.Successed) {
+                            alertify.success('Данные успешно изменены.', 3, function () {
+                                location.reload();
+                            });
+                        } else {
+                            alertify.error('Данные не сохранены! ' + data.Message);
+                        }
+                    }
+                });
             });
-        })
 
     </script>
 }

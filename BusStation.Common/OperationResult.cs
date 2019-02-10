@@ -10,5 +10,10 @@ namespace BusStation.Common
     {
         public bool Successed { get; set; }
         public string Message { get; set; }
+
+        public OperationResult()
+        {
+            Successed = true;
+        }
     }
 }

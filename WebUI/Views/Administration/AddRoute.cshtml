@@ -1,0 +1,113 @@
+﻿@model BusStation.Services.Models.RouteViewModel
+
+@{
+    ViewBag.Title = "AddRoute";
+}
+
+<h2 align="center">Добавление новых маршрутов</h2>
+
+<form class="form-horizontal" id="routeForm">
+    <div id="dynamicFields">
+        <div class="well" id="fields">
+            <div class="form-group">
+                @Html.LabelFor(l => l.RouteModels[0].StartId, new {@class = "col-md-1 control-label"})
+                <div class="col-md-2">
+                    @Html.DropDownListFor(t => t.RouteModels[0].StartId, Model.Routes, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.RouteModels[0].StopId, new {@class = "col-md-1 control-label"})
+                <div class="col-md-2">
+                    @Html.DropDownListFor(t => t.RouteModels[0].StopId, Model.Routes, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.RouteModels[0].RouteNumber, new {@class = "col-md-1 control-label"})
+                <div class="col-md-1">
+                    @Html.TextBoxFor(t => t.RouteModels[0].RouteNumber, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.RouteModels[0].NumberOfSeats, new {@class = "col-md-1 control-label"})
+                <div class="col-md-1">
+                    @Html.TextBoxFor(t => t.RouteModels[0].NumberOfSeats, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.RouteModels[0].Price, new {@class = "col-md-1 control-label"})
+                <div class="col-md-1">
+                    @Html.TextBoxFor(t => t.RouteModels[0].Price, new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <button type="button" class="btn btn-default" id="addField" >Добавить </button>
+    <button type="button" class="btn btn-danger" id="removeField" disabled="disabled">Удалить </button>
+
+    <button type="submit" class="btn btn-info">Сохранить</button>
+</form>
+
+@section scripts
+{
+    <script>
+        var originalFields;
+        var i = 1;
+        $(document).ready(function() {
+            originalFields = $('#dynamicFields').clone();
+        });
+
+        $('#addField').on('click',
+            function() {
+                var fields = $(originalFields).clone();
+                addIndexToAttribute(fields);
+                $('#dynamicFields').append(fields.html());
+                $('#removeField').removeAttr('disabled');
+            });
+
+        $('#removeField').on('click',
+            function () {
+
+                var fields = $('#dynamicFields .well');
+                var length = fields.length;
+
+                if (fields.length > 1) {
+                    $(fields).last().remove();
+                    length--;
+                }
+                if (fields.length ===2) {
+                    $('#removeField').attr('disabled', 'disabled');
+                }
+
+            });
+
+        function addIndexToAttribute(originalFields) {
+
+            originalFields.find('input, select').each(function () {
+
+                var namePaths = $(this).attr('name').split(/\[[0 - 9]]/);
+                var idPaths = $(this).attr('id').split(/[0-9]/);
+
+                $(this).attr('name', namePaths[0] + '[' + i + ']' + namePaths[1]);
+                $(this).attr('id', idPaths[0] +  i +  idPaths[1]);
+            });
+
+            i++;
+        }
+
+        $('#routeForm').on('submit',
+            function(e) {
+                e.preventDefault();
+                var data = $(this).serialize();
+
+                $.ajax({
+                    url: '/Administration/AddRoute',
+                    method: 'POST',
+                    data: data,
+                    success: function(data) {
+                        if (data.Successed) {
+                            alertify.success('Данные успешно Добавлены.', 2, function () {
+                                location.reload();
+                            });
+                        } else {
+                            alertify.error('Данные не добавлены! ' + data.Message);
+                        }                  
+                    }
+                });
+            });
+
+    </script>
+}

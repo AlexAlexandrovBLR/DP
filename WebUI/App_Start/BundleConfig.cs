@@ -30,11 +30,17 @@ namespace WebUI
                 "~/Content/Menu/FancyMenu.css"));
             bundles.Add(new StyleBundle("~/Content/yandexmap").Include(
                 "~/Content/Map/YandexMap.css"));
+            bundles.Add(new StyleBundle("~/Content/alertify").Include(
+                "~/Content/alertifyjs/alertify.min.css",
+                "~/Content/alertifyjs/themes/default.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/fancymenu").Include(
                 "~/Scripts/app/FancyMenu/FancyMenu.js"));
             bundles.Add(new ScriptBundle("~/bundles/yandexmap").Include(
                 "~/Scripts/app/Map/YandexMap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/alertify").Include(
+                "~/Scripts/alertify.min.js"));
+
         }
     }
 }

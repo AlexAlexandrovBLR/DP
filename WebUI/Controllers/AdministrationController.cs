@@ -53,10 +53,50 @@ namespace WebUI.Controllers
             return Json(result);
         }
 
+        [HttpPost]
         public ActionResult SaveChangeBusStop(BusStopDetailsViewModel model)
         {
-            return null;
+            var result = _administrationService.UpdateBusStop(model);
+
+            return Json(result);
         }
 
+        [HttpGet]
+        public ActionResult RemoveBusStop()
+        {
+            var model = new RemoveBusStopViewModel
+            {
+                BusStops = _administrationService.GetAllBusStopsName()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveBusStop(BusStopDetailsViewModel model)
+        {
+            var result = _administrationService.RemoveBusStop(model);
+
+            return Json(result);
+        }
+
+        [HttpGet]
+        public ActionResult AddRoute()
+        {
+            RouteViewModel model = new RouteViewModel
+            {
+                Routes = _administrationService.GetAllBusStopsName()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddRoute(RouteViewModel model)
+        {
+            var result = _administrationService.AddRoutes(model.RouteModels);
+
+            return Json(result);
+        }
     }
 }

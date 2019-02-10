@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using BusStation.Common;
 using BusStation.Data.Entities;
 using BusStation.Domain.Interfaces;
+using BusStation.Services.Enums;
 using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
+using BusStation.Services.Models.Dto;
 
 namespace BusStation.Services.Services
 {
@@ -90,11 +93,124 @@ namespace BusStation.Services.Services
             return model;
         }
 
+        public OperationResult UpdateBusStop(BusStopDetailsViewModel model)
+        {
+            BusStop busStop = _unitOfWork.BusStopsRepository.GetById(model.Id);
+
+            if (busStop!=null)
+            {
+                busStop.Name = model.Name;
+                busStop.Description = model.Description;
+                busStop.Latitude = model.Latitude;
+                busStop.Longitude = model.Longitude;
+
+                var result = _unitOfWork.BusStopsRepository.Update(busStop);
+
+                if (result.Successed)
+                {
+                    return _unitOfWork.Save();
+                }
+            }
+
+            return new OperationResult
+            {
+                Successed = false,
+                Message = "При сохранении изменений произошла ошибка"
+            };
+        }
+
+        public OperationResult RemoveBusStop(BusStopDetailsViewModel model)
+        {
+            BusStop busStop = _unitOfWork.BusStopsRepository.GetById(model.Id);
+
+            if (busStop != null)
+            {
+                var result = _unitOfWork.BusStopsRepository.Delete(busStop);
+
+                if (result.Successed)
+                {
+                    return _unitOfWork.Save();
+                }
+            }
+
+            return new OperationResult
+            {
+                Successed = false,
+                Message = "При удвлении произошла ошибка"
+            };
+        }
+
+        public OperationResult AddRoutes(List<RouteModelDto> routes)
+        {
+            bool isAdd = false;
+
+            foreach (var route in routes)
+            {
+                var check = CheckRoute(route.StartId, route.StopId);
+
+                if (check)
+                {
+                    isAdd = true;
+
+                    var newRoute = new Route
+                    {
+                        NumberOfSeats = route.NumberOfSeats,
+                        Price = route.Price,
+                        RouteNumber = route.RouteNumber,
+                        RouteStops = new List<RouteStop>
+                        {
+                            new RouteStop
+                            {
+                                BusStopId = route.StartId,
+                                TypeStopId = (int) TypeStopEnum.Departure
+                            },
+                            new RouteStop
+                            {
+                                BusStopId = route.StopId,
+                                TypeStopId = (int) TypeStopEnum.Arrival
+                            }
+                        }
+                    };
+
+                    _unitOfWork.RoutesRepository.Add(newRoute);
+                }
+            }
+
+            if (isAdd)
+            {
+                return _unitOfWork.Save();
+            }
+
+            return new OperationResult
+            {
+                Successed = false,
+                Message = "При добавлении маршрута произошла ошибка или маршруты уже существуют"
+            };
+        }
+
         #endregion
 
 
 
         #region Private methods
+
+        private bool CheckRoute(int startId, int stopId)
+        {
+            if (startId == stopId)
+            {
+                return false;
+            }
+
+            var start = _unitOfWork.RouteStopssRepository.GetAll().FirstOrDefault(f => f.BusStopId == startId && f.TypeStopId == (int)TypeStopEnum.Departure);
+            var stop = _unitOfWork.RouteStopssRepository.GetAll().FirstOrDefault(f => f.BusStopId == stopId && f.TypeStopId == (int)TypeStopEnum.Arrival);
+
+            if (start != null && stop != null)
+            {
+                return start.RouteId != stop.RouteId;
+            }
+
+            return true;
+        }
 
         private bool CheckBusStop(string name)
         {

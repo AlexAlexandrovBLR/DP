@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fancymenu")
     @Styles.Render("~/Content/yandexmap")
+    @Styles.Render("~/Content/alertify")
     <script src="https://api-maps.yandex.ru/2.1/?apikey=7af08232-9f57-41c7-987b-2a019f2841fc&lang=ru_RU" type="text/javascript"></script>
 </head>
 <body>
@@ -60,9 +61,9 @@
                             @*<li class="dropdown-header">Dropdown heading</li>*@
                             <li><a href="/Administration/AddNewStops">Добавить новые остановки</a></li>
                             <li><a href="/Administration/UpdateBusStops">Редактировать остановки</a></li>
-                            @*<li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>*@
+                            <li><a href="/Administration/RemoveBusStop">Удаление остановок</a></li>
+                            <li><a href="/Administration/AddRoute">Добавление маршрутов</a></li>
+                            @*<li><a href="#">One more separated link</a></li>*@
                         </ul>
                     </li>
                 }
@@ -110,6 +111,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/fancymenu")
+    @Scripts.Render("~/bundles/alertify")
 <script src="https://rawgit.com/RobinHerbots/Inputmask/4.x/dist/jquery.inputmask.bundle.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     @RenderSection("scripts", required: false)

@@ -1,4 +1,5 @@
-﻿using BusStation.Data.Context;
+﻿using BusStation.Common;
+using BusStation.Data.Context;
 using BusStation.Data.Entities;
 
 namespace BusStation.Domain.Interfaces
@@ -17,6 +18,6 @@ namespace BusStation.Domain.Interfaces
         IGenericBaseService<User> UsersRepository { get; }
         IGenericBaseService<Role> RolesRepository { get; }
 
-        void Save();
+        OperationResult Save();
     }
 }

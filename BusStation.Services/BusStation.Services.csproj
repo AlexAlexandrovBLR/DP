@@ -94,12 +94,15 @@
     <Compile Include="Models\CoordinatesModel.cs" />
     <Compile Include="Models\CurrentRouteViewModel.cs" />
     <Compile Include="Models\Dto\BusStopModelDto.cs" />
+    <Compile Include="Models\Dto\RouteModelDto.cs" />
     <Compile Include="Models\Dto\TimeTableModelDto.cs" />
     <Compile Include="Models\InputModels\SearchRouteFilterModel.cs" />
     <Compile Include="Models\ListTimeTableViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\RemoveBusStopViewModel.cs" />
+    <Compile Include="Models\RouteViewModel.cs" />
     <Compile Include="Models\SaveBusStopsViewModel.cs" />
     <Compile Include="Models\TimeTableViewModel.cs" />
     <Compile Include="Models\UpdateBusStopsViewModel.cs" />

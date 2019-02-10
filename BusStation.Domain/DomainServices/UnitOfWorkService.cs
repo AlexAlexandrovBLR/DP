@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Remoting.Messaging;
+using BusStation.Common;
 using BusStation.Data.Context;
 using BusStation.Data.Entities;
 using BusStation.Domain.Interfaces;
@@ -56,9 +57,21 @@ namespace BusStation.Domain.DomainServices
             _rolesRepository ?? new RolesRepository(_busStationContext);
         
 
-        public void Save()
+        public OperationResult Save()
         {
-            _busStationContext.SaveChanges();
+            try
+            {
+                _busStationContext.SaveChanges();
+                return new OperationResult();
+            }
+            catch (Exception e)
+            {
+                return new OperationResult
+                {
+                    Successed = false,
+                    Message = e.Message
+                };
+            }
         }
 
         //IDisposable
