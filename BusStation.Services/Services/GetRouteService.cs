@@ -4,6 +4,7 @@ using BusStation.Domain.Interfaces;
 using BusStation.Services.Enums;
 using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
+using BusStation.Services.Models.InputModels;
 
 namespace BusStation.Services.Services
 {
@@ -45,6 +46,33 @@ namespace BusStation.Services.Services
                     });
                 }
             });
+            return result;
+        }
+
+        public List<RouteStopsModel> GetStopsNames(int routeId)
+        {
+            List<RouteStopsModel> result=new List<RouteStopsModel>();
+
+            var routes = _unitOfWork.RouteStopssRepository.GetAll().Where(w => w.RouteId == routeId).GroupBy(g => g.TypeStopId);
+
+            foreach (var item in routes)
+            {
+                RouteStopsModel stop=new RouteStopsModel();
+
+                if (item.Key == (int) TypeStopEnum.Departure)
+                {
+                    stop.TypeStop = TypeStopEnum.Departure;
+                    stop.Name = item.FirstOrDefault()?.BusStop.Name;
+                }
+                else
+                {
+                    stop.TypeStop = TypeStopEnum.Arrival;
+                    stop.Name = item.FirstOrDefault()?.BusStop.Name;
+                }
+
+                result.Add(stop);
+            }
+
             return result;
         }
     }

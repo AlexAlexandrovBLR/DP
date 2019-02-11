@@ -14,5 +14,8 @@ namespace BusStation.Services.Interfaces
         OperationResult UpdateBusStop(BusStopDetailsViewModel model);
         OperationResult RemoveBusStop(BusStopDetailsViewModel model);
         OperationResult AddRoutes(List<RouteModelDto> routes);
+        List<SelectListItem> GetAllRouteItems();
+        UpdateRoteViewModel GetRouteDetalies(int id);
+        OperationResult SaveChangesRoute(UpdateRoteViewModel model);
     }
 }

@@ -17,10 +17,12 @@ namespace BusStation.Services.Services
         #region Filds and ctors
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IGetRouteService _getRouteService;
 
-        public AdministrationService(IUnitOfWork unitOfWork)
+        public AdministrationService(IUnitOfWork unitOfWork, IGetRouteService getRouteService)
         {
             _unitOfWork = unitOfWork;
+            _getRouteService = getRouteService;
         }
 
         #endregion
@@ -185,6 +187,65 @@ namespace BusStation.Services.Services
             {
                 Successed = false,
                 Message = "При добавлении маршрута произошла ошибка или маршруты уже существуют"
+            };
+        }
+
+        public List<SelectListItem> GetAllRouteItems()
+        {
+            var result = _getRouteService.GetAllRoutes();
+
+            var items = result.Select(s => new SelectListItem
+            {
+                Text = $"{s.DepartureBusStopName} - {s.ArrivalBusStopName}",
+                Value = s.RouteId.ToString()
+            });
+
+            return items.ToList();
+        }
+
+        public UpdateRoteViewModel GetRouteDetalies(int id)
+        {
+            UpdateRoteViewModel result=new UpdateRoteViewModel();
+
+            var stopsName = _getRouteService.GetStopsNames(id);
+
+            var route = _unitOfWork.RoutesRepository.GetById(id);
+
+            if (stopsName.Any() && route != null)
+            {
+                result.RouteId = route.Id;
+                result.StartName = stopsName.FirstOrDefault(f => f.TypeStop == TypeStopEnum.Departure)?.Name;
+                result.StopName = stopsName.FirstOrDefault(f => f.TypeStop == TypeStopEnum.Arrival)?.Name;
+                result.RouteNumber = route.RouteNumber;
+                result.NumberOfSeats = route.NumberOfSeats;
+                result.Price = route.Price;
+            }
+
+            return result;
+        }
+
+        public OperationResult SaveChangesRoute(UpdateRoteViewModel model)
+        {
+            var route = _unitOfWork.RoutesRepository.GetById(model.RouteId);
+
+            if (route!=null)
+            {
+                route.NumberOfSeats = model.NumberOfSeats;
+                route.Price = model.Price;
+                route.RouteNumber = model.RouteNumber;
+
+                var updateResult = _unitOfWork.RoutesRepository.Update(route);
+
+                if (updateResult.Successed)
+                {
+                    return _unitOfWork.Save();
+                }
+            }
+
+            return new OperationResult
+            {
+                Successed = false,
+                Message = "При изменении маршрута произошла ошибка"
             };
         }
 

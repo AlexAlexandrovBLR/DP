@@ -98,5 +98,32 @@ namespace WebUI.Controllers
 
             return Json(result);
         }
+
+        [HttpGet]
+        public ActionResult UpdateRoutes()
+        {
+            var model = new UpdateRoteViewModel()
+            {
+                Routes = _administrationService.GetAllRouteItems()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult GetBusRouteDetails(int id)
+        {
+            var result = _administrationService.GetRouteDetalies(id);
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult SaveChangesRoute(UpdateRoteViewModel model)
+        {
+            var result = _administrationService.SaveChangesRoute(model);
+
+            return Json(result);
+        }
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="Models\Dto\BusStopModelDto.cs" />
     <Compile Include="Models\Dto\RouteModelDto.cs" />
     <Compile Include="Models\Dto\TimeTableModelDto.cs" />
+    <Compile Include="Models\InputModels\RouteStopsModel.cs" />
     <Compile Include="Models\InputModels\SearchRouteFilterModel.cs" />
     <Compile Include="Models\ListTimeTableViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Models\SaveBusStopsViewModel.cs" />
     <Compile Include="Models\TimeTableViewModel.cs" />
     <Compile Include="Models\UpdateBusStopsViewModel.cs" />
+    <Compile Include="Models\UpdateRoteViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Ninject\NinjectBindings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

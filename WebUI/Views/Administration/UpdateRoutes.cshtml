@@ -1,0 +1,123 @@
+﻿@model BusStation.Services.Models.UpdateRoteViewModel
+
+
+@{
+    ViewBag.Title = "UpdateRoutes";
+}
+
+<h2 align="center">Редактирование маршрутов</h2>
+
+<div class="well">
+    <label class="col-md-3 control-label">
+        <b>Выберите автобусную остановку:</b>
+    </label>
+    @Html.DropDownListFor(d => d.RouteId, Model.Routes, new { @class = "form-control", id = "selectRoute" })
+</div>
+
+<form class="well form-horizontal" id="editForm">
+    
+    @Html.HiddenFor(h=>h.RouteId)
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.StartId, new {@class = "col-md-4 control-label"})
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.StartName, new {@class = "form-control", disabled="disabled"})
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.StopId, new {@class = "col-md-4 control-label"})
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.StopName, new {@class = "form-control", disabled="disabled"})
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.RouteNumber, new {@class = "col-md-4 control-label"})
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.RouteNumber, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.NumberOfSeats, new {@class = "col-md-4 control-label"})
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.NumberOfSeats, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.Price, new {@class = "col-md-4 control-label"})
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.Price, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-warning">Сохранить <span class="glyphicon glyphicon-send"></span></button>
+        </div>
+    </div>
+</form>
+
+
+@section scripts
+{
+    <script>
+
+        $('#selectRoute').on('change',
+            function() {
+                $.ajax({
+                    url: '/Administration/GetBusRouteDetails',
+                    method: 'POST',
+                    data: {
+                        id: $(this).val()
+                    },
+                    success: function(data) {
+                        $('#RouteId').val(data.RouteId);
+                        $('#StartName').val(data.StartName);
+                        $('#StopName').val(data.StopName);
+                        $('#NumberOfSeats').val(data.NumberOfSeats);
+                        $('#RouteNumber').val(data.RouteNumber);
+                        $('#Price').val(data.Price);
+                    }
+                });
+            });
+
+        $('#selectRoute').change();
+
+        $('#editForm').on('submit',
+            function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '/Administration/SaveChangesRoute',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        if (data.Successed) {
+                            alertify.success('Данные успешно изменены.',
+                                3,
+                                function() {
+                                    location.reload();
+                                });
+                        } else {
+                            alertify.error('Данные не сохранены! ' + data.Message);
+                        }
+                    }
+                });
+            });
+
+
+    </script>
+}

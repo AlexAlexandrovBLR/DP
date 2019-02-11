@@ -325,6 +325,7 @@
     <Content Include="Views\Administration\UpdateBusStops.cshtml" />
     <Content Include="Views\Administration\RemoveBusStop.cshtml" />
     <Content Include="Views\Administration\AddRoute.cshtml" />
+    <Content Include="Views\Administration\UpdateRoutes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
