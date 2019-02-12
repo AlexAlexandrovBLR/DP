@@ -125,5 +125,35 @@ namespace WebUI.Controllers
 
             return Json(result);
         }
+
+        [HttpGet]
+        public ActionResult RemoveRoute()
+        {
+            var model = new RemoveRouteViewModel()
+            {
+                Routes = _administrationService.GetAllRouteItems()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveRoute(RemoveRouteViewModel model)
+        {
+            var result = _administrationService.RemoveRoute(model.RouteId);
+
+            return Json(result);
+        }
+
+        [HttpGet]
+        public ActionResult AddTimeTables()
+        {
+            var model = new AddTimeTableViewModel
+            {
+                RoutesList = _administrationService.GetAllRouteItems()
+            };
+
+            return View(model);
+        }
     }
 }

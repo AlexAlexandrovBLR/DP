@@ -1,0 +1,130 @@
+﻿@model BusStation.Services.Models.RemoveRouteViewModel
+
+@{
+    ViewBag.Title = "RemoveRoute";
+}
+
+<h2 align="center">Удаление автобусных маршрутов</h2>
+
+
+<div class="well">
+    <label class="col-md-3 control-label">
+        <b>Выберите маршрут:</b>
+    </label>
+    @Html.DropDownListFor(d => d.RouteId, Model.Routes, new { @class = "form-control", id = "selectRoute" })
+</div>
+
+<form class="well form-horizontal" id="removeForm">
+
+    @Html.HiddenFor(h => h.RouteId)
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.StartId, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.StartName, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.StopId, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.StopName, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.RouteNumber, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.RouteNumber, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(l => l.NumberOfSeats, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.NumberOfSeats, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.Price, new { @class = "col-md-4 control-label" })
+        <div class="col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(t => t.Price, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+            <button type="button" id="removeBtn" class="btn btn-danger">Удалить <span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+    </div>
+</form>
+
+
+@section scripts
+{
+    
+    <script>
+
+        $('#selectRoute').on('change',
+            function () {
+                $.ajax({
+                    url: '/Administration/GetBusRouteDetails',
+                    method: 'POST',
+                    data: {
+                        id: $(this).val()
+                    },
+                    success: function (data) {
+                        $('#RouteId').val(data.RouteId);
+                        $('#StartName').val(data.StartName);
+                        $('#StopName').val(data.StopName);
+                        $('#NumberOfSeats').val(data.NumberOfSeats);
+                        $('#RouteNumber').val(data.RouteNumber);
+                        $('#Price').val(data.Price);
+                    }
+                });
+            });
+
+        $('#selectRoute').change();
+
+        $('#removeBtn').on('click', function() {
+            alertify.confirm("Потвердите удаление",
+                "Внимание удаление автобусного маршрута приведет к удалению всех связанных расписаний! Вы действительно хотите удалить маршрут?",
+                function() { confirmOk() },
+                function() { confirmCancel() });
+        });
+
+        function confirmOk() {
+            $.ajax({
+                url: '/Administration/RemoveRoute',
+                type: 'POST',
+                data: $('#removeForm').serialize(),
+                success: function(data) {
+                    if (data.Successed) {
+                        alertify.success('Данные успешно удалены.', 2, function () {
+                            location.reload();
+                        });
+                    } else {
+                        alertify.error('Данные не удалены! ' + data.Message);
+                    }
+                }
+            });
+        }
+
+        function confirmCancel() {
+            alertify.error("Удаление отменено.");
+        }
+
+    </script>
+
+}

@@ -88,11 +88,13 @@
     <Compile Include="Interfaces\IAdministrationService.cs" />
     <Compile Include="Interfaces\IGetRouteService.cs" />
     <Compile Include="Interfaces\ISearchService.cs" />
+    <Compile Include="Models\AddTimeTableViewModel.cs" />
     <Compile Include="Models\BusStopDetailsViewModel.cs" />
     <Compile Include="Models\BusStopViewModel.cs" />
     <Compile Include="Models\BuyTicketViewModel.cs" />
     <Compile Include="Models\CoordinatesModel.cs" />
     <Compile Include="Models\CurrentRouteViewModel.cs" />
+    <Compile Include="Models\Dto\AddTimeTableModelDto.cs" />
     <Compile Include="Models\Dto\BusStopModelDto.cs" />
     <Compile Include="Models\Dto\RouteModelDto.cs" />
     <Compile Include="Models\Dto\TimeTableModelDto.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RemoveBusStopViewModel.cs" />
+    <Compile Include="Models\RemoveRouteViewModel.cs" />
     <Compile Include="Models\RouteViewModel.cs" />
     <Compile Include="Models\SaveBusStopsViewModel.cs" />
     <Compile Include="Models\TimeTableViewModel.cs" />

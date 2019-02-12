@@ -1,0 +1,87 @@
+﻿@model BusStation.Services.Models.AddTimeTableViewModel
+
+
+@{
+    ViewBag.Title = "AddTimeTables";
+}
+
+<h2 align="center">Добавление расписаний маршрутов</h2>
+
+<form class="form-horizontal">
+    <div id="dynamicFields">
+        
+        <div class="well" id="fields">
+            <div class="form-group">
+                @Html.LabelFor(l => l.TimeTables[0].RouteId, new {@class = "col-md-3 control-label"})
+                <div class="col-md-3">
+                    @Html.DropDownListFor(t => t.TimeTables[0].RouteId, Model.RoutesList, new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(l => l.TimeTables[0].DepartureDate, new {@class = "col-md-3 control-label"})
+                <div class="col-md-3">
+                    @Html.TextBoxFor(t => t.TimeTables[0].DepartureDate, new {@class = "form-control", type = "date"})
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <button type="button" class="btn btn-default" id="addField" >Добавить </button>
+    <button type="button" class="btn btn-danger" id="removeField" disabled="disabled">Удалить </button>
+
+    <button type="submit" class="btn btn-info" style="float: right">Сохранить</button>
+</form>
+
+
+@section scripts
+{
+    
+    <script>
+        var originalFields;
+        var i = 1;
+        $(document).ready(function() {
+            originalFields = $('#dynamicFields').clone();
+            //addIndexToAttribute($('#fields'));
+        });
+
+        $('#addField').on('click',
+            function() {
+                var fields = $(originalFields).clone();
+                addIndexToAttribute(fields);
+                $('#dynamicFields').append(fields.html());
+                $('#removeField').removeAttr('disabled');
+            });
+
+        $('#removeField').on('click',
+            function () {
+
+                var fields = $('#dynamicFields .well');
+                var length = fields.length;
+
+                if (fields.length > 1) {
+                    $(fields).last().remove();
+                    length--;
+                }
+                if (fields.length ===2) {
+                    $('#removeField').attr('disabled', 'disabled');
+                }
+
+            });
+
+        function addIndexToAttribute(originalFields) {
+            originalFields.find('input, select').each(function () {
+
+                var namePaths = $(this).attr('name').split(/\[[0 - 9]]/);
+                var idPaths = $(this).attr('id').split(/[0-9]/);
+
+
+                $(this).attr('name', namePaths[0] + '[' + i + ']' + namePaths[1]);
+                $(this).attr('id', idPaths[0] +  i +  idPaths[1]);
+            });
+
+            i++;
+        }
+
+
+    </script>
+
+}

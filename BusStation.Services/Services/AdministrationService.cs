@@ -249,6 +249,28 @@ namespace BusStation.Services.Services
             };
         }
 
+        public OperationResult RemoveRoute(int routeId)
+        {
+            Route route = _unitOfWork.RoutesRepository.GetById(routeId);
+
+            if (route != null)
+            {
+                var result = _unitOfWork.RoutesRepository.Delete(route);
+
+                if (result.Successed)
+                {
+                    return _unitOfWork.Save();
+                }
+            }
+
+            return new OperationResult
+            {
+                Successed = false,
+                Message = "При удвлении произошла ошибка"
+            };
+        }
+
+        
         #endregion
 
 

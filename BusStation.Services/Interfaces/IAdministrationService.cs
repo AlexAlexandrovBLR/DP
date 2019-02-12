@@ -17,5 +17,6 @@ namespace BusStation.Services.Interfaces
         List<SelectListItem> GetAllRouteItems();
         UpdateRoteViewModel GetRouteDetalies(int id);
         OperationResult SaveChangesRoute(UpdateRoteViewModel model);
+        OperationResult RemoveRoute(int routeId);
     }
 }
