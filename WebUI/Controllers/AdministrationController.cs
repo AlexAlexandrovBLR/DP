@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
+using BusStation.Services.Models.Dto;
 
 namespace WebUI.Controllers
 {
@@ -154,6 +155,13 @@ namespace WebUI.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddTimeTables(AddTimeTableViewModel model)
+        {
+            var result = _administrationService.AddTimeTables(model.TimeTables);
+            return Json(result);
         }
     }
 }

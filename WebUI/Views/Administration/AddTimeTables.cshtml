@@ -7,18 +7,22 @@
 
 <h2 align="center">Добавление расписаний маршрутов</h2>
 
-<form class="form-horizontal">
+<form class="form-horizontal" id="addTimeTableForm">
     <div id="dynamicFields">
         
         <div class="well" id="fields">
             <div class="form-group">
-                @Html.LabelFor(l => l.TimeTables[0].RouteId, new {@class = "col-md-3 control-label"})
-                <div class="col-md-3">
+                @Html.LabelFor(l => l.TimeTables[0].RouteId, new {@class = "col-md-2 control-label"})
+                <div class="col-md-2">
                     @Html.DropDownListFor(t => t.TimeTables[0].RouteId, Model.RoutesList, new {@class = "form-control"})
                 </div>
-                @Html.LabelFor(l => l.TimeTables[0].DepartureDate, new {@class = "col-md-3 control-label"})
-                <div class="col-md-3">
+                @Html.LabelFor(l => l.TimeTables[0].DepartureDate, new {@class = "col-md-2 control-label"})
+                <div class="col-md-2">
                     @Html.TextBoxFor(t => t.TimeTables[0].DepartureDate, new {@class = "form-control", type = "date"})
+                </div>
+                @Html.LabelFor(l => l.TimeTables[0].DepartureTime, new {@class = "col-md-2 control-label"})
+                <div class="col-md-2">
+                    @Html.TextBoxFor(t => t.TimeTables[0].DepartureTime, new {@class = "form-control", type="time"})
                 </div>
             </div>
         </div>
@@ -28,7 +32,7 @@
     <button type="button" class="btn btn-default" id="addField" >Добавить </button>
     <button type="button" class="btn btn-danger" id="removeField" disabled="disabled">Удалить </button>
 
-    <button type="submit" class="btn btn-info" style="float: right">Сохранить</button>
+    <button type="button" class="btn btn-info" style="float: right" id="addTimeTable">Сохранить</button>
 </form>
 
 
@@ -38,9 +42,8 @@
     <script>
         var originalFields;
         var i = 1;
-        $(document).ready(function() {
-            originalFields = $('#dynamicFields').clone();
-            //addIndexToAttribute($('#fields'));
+        $(document).ready(function () {
+            originalFields = $('#dynamicFields').clone();  
         });
 
         $('#addField').on('click',
@@ -81,6 +84,21 @@
             i++;
         }
 
+        $('#addTimeTable').on('click',
+            function() {
+                $.ajax({
+                    url: '/Administration/AddTimeTables',
+                    method: 'POST',
+                    data: $('#addTimeTableForm').serialize(),
+                    success: function(data) {
+                        if (data.Successed) {
+                            alertify.success('Данные успешно сохранены', 2, function() { location.reload(); });
+                        } else {
+                            alertify.error('Данные не сохранены! ' + data.Message);
+                        }
+                    }
+                });
+            });
 
     </script>
 

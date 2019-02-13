@@ -8,8 +8,12 @@ namespace BusStation.Services.Models.Dto
         [DisplayName("Маршрут")]
         public int RouteId { get; set; }
 
-        [DisplayName("Дата и время")]
+        [DisplayName("Дата")]
         public DateTime DepartureDate { get; set; }
+
+        [DisplayName("Время")]
+        public TimeSpan DepartureTime { get; set; }
+
 
     }
 }

@@ -125,7 +125,7 @@ namespace BusStation.Services.Services
         {
             BusStop busStop = _unitOfWork.BusStopsRepository.GetById(model.Id);
 
-            if (busStop != null)
+            if (busStop != null && CheckTimeTableForBusStop(busStop))
             {
                 var result = _unitOfWork.BusStopsRepository.Delete(busStop);
 
@@ -138,7 +138,7 @@ namespace BusStation.Services.Services
             return new OperationResult
             {
                 Successed = false,
-                Message = "При удвлении произошла ошибка"
+                Message = "При удвлении произошла ошибка. Остановочный пункт имеет активные маршруты."
             };
         }
 
@@ -253,7 +253,7 @@ namespace BusStation.Services.Services
         {
             Route route = _unitOfWork.RoutesRepository.GetById(routeId);
 
-            if (route != null)
+            if (route != null && CheckTimeTableForRoute(route))
             {
                 var result = _unitOfWork.RoutesRepository.Delete(route);
 
@@ -266,16 +266,54 @@ namespace BusStation.Services.Services
             return new OperationResult
             {
                 Successed = false,
-                Message = "При удвлении произошла ошибка"
+                Message = "При удвлении произошла ошибка. Маршрут имеет активное расписание."
             };
         }
 
+        public OperationResult AddTimeTables(List<AddTimeTableModelDto> model)
+        {
+            bool isAdded = false;
+            foreach (var item in model)
+            {
+                if (CheckTimeTable(item))
+                {
+                    isAdded = true;
+
+                    TimeTable timeTable = new TimeTable
+                    {
+                        RouteId = item.RouteId,
+                        Departure = item.DepartureDate + item.DepartureTime,
+                        Arrival = item.DepartureDate + item.DepartureTime
+                    };
+
+                    _unitOfWork.TimeTablesRepository.Add(timeTable);
+                }
+            }
+            if (isAdded)
+            {
+                return _unitOfWork.Save();
+            }
+
+            return new OperationResult
+            {
+                Successed = false,
+                Message = "Произошла ошибка сохранеия или все введенные данные уже существую."
+            };
+        }
         
         #endregion
 
 
 
         #region Private methods
+
+        private bool CheckTimeTable(AddTimeTableModelDto timeTable)
+        {
+            var result = _unitOfWork.TimeTablesRepository.GetAll().FirstOrDefault(f =>
+                f.RouteId == timeTable.RouteId && f.Departure == timeTable.DepartureDate + timeTable.DepartureTime);
+
+            return result == null;
+        }
 
         private bool CheckRoute(int startId, int stopId)
         {
@@ -302,6 +340,15 @@ namespace BusStation.Services.Services
             return item == null;
         }
 
+        private bool CheckTimeTableForBusStop(BusStop busStop)
+        {
+            return !busStop.RouteStops.Any(a => a.Route.TimeTables.Any());
+        }
+
+        private bool CheckTimeTableForRoute(Route route)
+        {
+            return !route.TimeTables.Any();
+        }
         #endregion
 
 
