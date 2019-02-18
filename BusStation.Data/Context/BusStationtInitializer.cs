@@ -202,9 +202,21 @@ namespace BusStation.Data.Context
                 Arrival = DateTime.Now.AddHours(7),
                 Departure = DateTime.Now.AddHours(5)
             };
+            TimeTable timeTableGrodnoThree = new TimeTable
+            {
+                Arrival = DateTime.Now.AddMonths(-1).AddHours(7),
+                Departure = DateTime.Now.AddMonths(-1).AddHours(5)
+            };
+            TimeTable timeTableGrodnoFour = new TimeTable
+            {
+                Arrival = DateTime.Now.AddMonths(-3).AddHours(7),
+                Departure = DateTime.Now.AddMonths(-3).AddHours(5)
+            };
 
             routeNumTwo.TimeTables.Add(timeTableGrodno);
             routeNumTwo.TimeTables.Add(timeTableGrodnoTwo);
+            routeNumTwo.TimeTables.Add(timeTableGrodnoThree);
+            routeNumTwo.TimeTables.Add(timeTableGrodnoFour);
 
             var roleAdmin = new Role {Name = "Admin"};
 

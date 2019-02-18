@@ -300,12 +300,41 @@ namespace BusStation.Services.Services
                 Message = "Произошла ошибка сохранеия или все введенные данные уже существую."
             };
         }
+
+        public List<SearchTimeTableViewModel> GetOldTimeTablesByRoute(int routeId)
+        {
+            string name = GetStringNameRoute(routeId);
+
+            var timeTables = _unitOfWork.TimeTablesRepository.GetAll()
+                .Where(w => w.RouteId == routeId && w.Departure <= DateTime.Now.AddDays(-1))
+                .Select(s =>
+                new SearchTimeTableViewModel
+                {
+                    DepartureDate = s.Departure,
+                    NameRoute = name
+                });
+
+            return timeTables.ToList();
+        }
         
         #endregion
 
 
 
         #region Private methods
+
+        private string GetStringNameRoute(int routeId)
+        {
+            var stopsName = _getRouteService.GetStopsNames(routeId);
+
+            if (stopsName != null)
+            {
+                return
+                    $"{stopsName.FirstOrDefault(f => f.TypeStop == TypeStopEnum.Departure)?.Name} - {stopsName.FirstOrDefault(f => f.TypeStop == TypeStopEnum.Arrival)?.Name}";
+            }
+
+            return string.Empty;
+        }
 
         private bool CheckTimeTable(AddTimeTableModelDto timeTable)
         {

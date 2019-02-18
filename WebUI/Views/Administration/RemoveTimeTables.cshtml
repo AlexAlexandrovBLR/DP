@@ -1,0 +1,47 @@
+﻿@model BusStation.Services.Models.RemoveTimeTableViewModel
+
+
+@{
+    ViewBag.Title = "RemoveTimeTables";
+}
+
+<h2 align="center">Удаление расписаний маршрутов</h2>
+
+@using (Ajax.BeginForm("GetTimeTables", null, new AjaxOptions {HttpMethod = "POST", OnFailure = "OnFailure", OnSuccess = "OnSuccess", UpdateTargetId = "result"}, new{@class="form-horizontal", id="getRouteFrom"} ))
+{
+    <div class="well">
+        <label class="col-md-3 control-label">
+            <b>Выберите маршрут:</b>
+        </label>
+        @Html.DropDownListFor(d => d.RouteId, Model.RoutesList, new { @class = "form-control", id = "selectRoute" })
+    </div>
+}
+
+
+
+<div id="result">
+
+</div>
+
+
+@section scripts
+{
+    <script>
+
+        $('#selectRoute').on('change',
+            function() {
+                $('#getRouteFrom').submit();
+            });
+
+        function OnFailure(data) {
+            alertify.error('Приполучении расписание произошла ошибка');
+        }
+
+        function OnSuccess(data) {
+            if (!!data.Empty) {
+                alertify.error('Для данного маршрута не найдено не активных расписаний.');
+            }
+        }
+
+    </script>
+}

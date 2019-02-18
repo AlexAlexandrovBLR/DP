@@ -19,5 +19,6 @@ namespace BusStation.Services.Interfaces
         OperationResult SaveChangesRoute(UpdateRoteViewModel model);
         OperationResult RemoveRoute(int routeId);
         OperationResult AddTimeTables(List<AddTimeTableModelDto> model);
+        List<SearchTimeTableViewModel> GetOldTimeTablesByRoute(int routeId);
     }
 }

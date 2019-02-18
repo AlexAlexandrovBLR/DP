@@ -163,5 +163,29 @@ namespace WebUI.Controllers
             var result = _administrationService.AddTimeTables(model.TimeTables);
             return Json(result);
         }
+
+        [HttpGet]
+        public ActionResult RemoveTimeTables()
+        {
+            var model = new RemoveTimeTableViewModel
+            {
+                RoutesList = _administrationService.GetAllRouteItems()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult GetTimeTables(RemoveTimeTableViewModel model)
+        {
+            var result = _administrationService.GetOldTimeTablesByRoute(model.RouteId);
+
+            if (result != null && result.Any())
+            {
+                return PartialView("TimeTables", result);
+            }
+
+            return Json(new {Empty = true}, JsonRequestBehavior.AllowGet);
+        }
     }
 }

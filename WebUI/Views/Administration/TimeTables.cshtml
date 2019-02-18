@@ -1,0 +1,27 @@
+﻿@model List<BusStation.Services.Models.SearchTimeTableViewModel>
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    <form class="form-horizontal">
+        <div class="well" id="fields">
+            <div class="form-group">
+                @Html.LabelFor(l=>l[i].NameRoute, new { @class = "col-md-2 control-label" })
+                <div class="col-md-3">
+                    <input type="text" class="form-control" disabled="disabled" value="@Model[i].NameRoute"/>
+                    @*@Html.LabelFor(t => t[i].NameRoute, new {@class = "form-control", disabled = "disabled"})*@
+                </div>
+                @Html.LabelFor(l => l[i].DepartureDate, new {@class = "col-md-2 control-label"})
+                <div class="col-md-2">
+                    <input type="text" class="form-control" disabled="disabled" value="@Model[i].DepartureDate.ToString("g")"/>
+                </div>
+                @*@Html.LabelFor(l => l[i].DepartureDate, new {@class = "col-md-2 control-label"})
+                <div class="col-md-2">
+                    <input type="text" class="form-control" disabled="disabled" value="@Model[i].DepartureDate.ToString("HH:mm")"/>
+                </div>*@
+                <button type="button" class="btn btn-danger removeTimeTable">Удалить<span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </div>
+
+    </form>
+}
+
