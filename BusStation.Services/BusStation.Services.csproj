@@ -88,8 +88,8 @@
     <Compile Include="Interfaces\IAdministrationService.cs" />
     <Compile Include="Interfaces\IGetRouteService.cs" />
     <Compile Include="Interfaces\ISearchService.cs" />
-    <Compile Include="Models\RemoveTimeTableViewModel.cs" />
     <Compile Include="Models\AddTimeTableViewModel.cs" />
+    <Compile Include="Models\RemoveTimeTableViewModel.cs" />
     <Compile Include="Models\BusStopDetailsViewModel.cs" />
     <Compile Include="Models\BusStopViewModel.cs" />
     <Compile Include="Models\BuyTicketViewModel.cs" />

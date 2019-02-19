@@ -20,5 +20,7 @@ namespace BusStation.Services.Interfaces
         OperationResult RemoveRoute(int routeId);
         OperationResult AddTimeTables(List<AddTimeTableModelDto> model);
         List<SearchTimeTableViewModel> GetOldTimeTablesByRoute(int routeId);
+        OperationResult RemoveTimeTableItem(int id);
+        OperationResult RemoveAllTimeTables(List<int> ids);
     }
 }

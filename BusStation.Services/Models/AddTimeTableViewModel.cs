@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using BusStation.Services.Models.Dto;
 
 namespace BusStation.Services.Models
 {
-    public class RemoveTimeTableViewModel : AddTimeTableModelDto
+    public class AddTimeTableViewModel:AddTimeTableModelDto
     {
         public List<SelectListItem> RoutesList { get; set; }
 

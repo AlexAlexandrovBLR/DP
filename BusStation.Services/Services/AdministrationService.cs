@@ -310,11 +310,52 @@ namespace BusStation.Services.Services
                 .Select(s =>
                 new SearchTimeTableViewModel
                 {
+                    TameTableId = s.Id,
                     DepartureDate = s.Departure,
                     NameRoute = name
                 });
 
             return timeTables.ToList();
+        }
+
+        public OperationResult RemoveTimeTableItem(int id)
+        {
+            var timeTable = _unitOfWork.TimeTablesRepository.GetById(id);
+
+            if (timeTable != null)
+            {
+                _unitOfWork.TimeTablesRepository.Delete(timeTable);
+
+                return _unitOfWork.Save();
+            }
+
+            return new OperationResult
+            {
+                Successed = false
+            };
+        }
+
+        public OperationResult RemoveAllTimeTables(List<int> ids)
+        {
+            if (ids != null && ids.Any())
+            {
+                foreach (var id in ids)
+                {
+                    var timeTable = _unitOfWork.TimeTablesRepository.GetById(id);
+
+                    if (timeTable != null)
+                    {
+                        _unitOfWork.TimeTablesRepository.Delete(timeTable);
+                    }
+                }
+
+                return _unitOfWork.Save();
+            }
+
+            return new OperationResult
+            {
+                Successed = false
+            };
         }
         
         #endregion

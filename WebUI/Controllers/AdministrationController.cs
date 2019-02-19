@@ -187,5 +187,21 @@ namespace WebUI.Controllers
 
             return Json(new {Empty = true}, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult RemoveTimeTable(int id)
+        {
+            var result = _administrationService.RemoveTimeTableItem(id);
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveAllTimeTables(List<int> ids)
+        {
+            var result = _administrationService.RemoveAllTimeTables(ids);
+
+            return Json(result);
+        }
     }
 }

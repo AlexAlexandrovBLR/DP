@@ -5,6 +5,7 @@ namespace BusStation.Services.Models.Dto
 {
     public class AddTimeTableModelDto
     {
+        public int TimeTableId { get; set; }
         [DisplayName("Маршрут")]
         public int RouteId { get; set; }
 

@@ -5,7 +5,7 @@
     ViewBag.Title = "RemoveTimeTables";
 }
 
-<h2 align="center">Удаление расписаний маршрутов</h2>
+<h2 align="center">Удаление не активных расписаний маршрутов</h2>
 
 @using (Ajax.BeginForm("GetTimeTables", null, new AjaxOptions {HttpMethod = "POST", OnFailure = "OnFailure", OnSuccess = "OnSuccess", UpdateTargetId = "result"}, new{@class="form-horizontal", id="getRouteFrom"} ))
 {
@@ -23,6 +23,12 @@
 
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-danger" style="float: right" id="removeAll" type="button" disabled="disabled">Удалить все записи<span class="glyphicon glyphicon-remove"></span></button>
+    </div>
+</div>
+
 
 @section scripts
 {
@@ -33,15 +39,68 @@
                 $('#getRouteFrom').submit();
             });
 
+        $('#selectRoute').change();
+
+
         function OnFailure(data) {
             alertify.error('Приполучении расписание произошла ошибка');
+            $('#removeAll').attr('disabled', 'disabled');
         }
 
         function OnSuccess(data) {
             if (!!data.Empty) {
                 alertify.error('Для данного маршрута не найдено не активных расписаний.');
+                $('#removeAll').attr('disabled', 'disabled');
+            } else {
+                wrapRemoveBtn();
+                $('#removeAll').removeAttr('disabled');
             }
+        };
+
+        function wrapRemoveBtn() {
+            $('.removeTimeTable').on('click',
+                function () {
+                    var form = $(this).closest('form');
+
+                    $.ajax({
+                        url: '/Administration/RemoveTimeTable',
+                        method: 'POST',
+                        data: { id: $(form).find('.hiddenId').val()},
+                        success: function(data) {
+                            if (data.Successed) {
+                                alertify.success('Запись удалена успешно!', 2, successItemRemove());
+                            } else {
+                                alertify.error('При удалении записи произошла ошибка!');
+                            }
+                        }
+                    });
+                });
+        };
+
+        function successItemRemove() {
+            $('#selectRoute').change();
         }
 
+        $('#removeAll').on('click',
+            function() {
+                var ids = $('.hiddenId');
+
+                $.ajax({
+                    url: '/Administration/RemoveAllTimeTables',
+                    method: 'POST',
+                    data: {ids: $.map(ids, function(a)
+                    {
+                        return a.value;
+                    })},
+                    success: function(data) {
+                        if (data.Successed) {
+                            alertify.success('Данные успешно удалены!', 2, successItemRemove());
+                        } else {
+                            alertify.error('При удалении данных произошла ошибка!');
+                        }
+                    }
+                });
+            });
+        
     </script>
 }
