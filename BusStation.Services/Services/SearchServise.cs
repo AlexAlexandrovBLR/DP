@@ -41,7 +41,7 @@ namespace BusStation.Services.Services
             });
 
             string sqlQuery =
-                @"select tt.Id as [TameTableId], r.Id as [RouteId], bs.[Name] as [NameStop], tt.Departure as [DepartureDate], r.Price as [Price], r.NumberOfSeats as [Seats], rs.TypeStopId as [TypeStopId]
+                @"select tt.Id as [TameTableId], r.Id as [RouteId], bs.[Name] as [NameStop], tt.Departure as [DepartureDate], r.Price as [Price], tt.Seats as [Seats], rs.TypeStopId as [TypeStopId]
                 from TimeTables tt inner join [Routes] r on tt.RouteId=r.Id
                 inner join RouteStops rs on rs.RouteId = r.Id
                 inner join BusStops bs on rs.BusStopId=bs.Id
@@ -87,57 +87,6 @@ namespace BusStation.Services.Services
         }
 
         #region Private methods
-
-        //private string GetWherePathByFilter(SearchRouteFilterModel filter)
-        //{
-        //    StringBuilder stringBuilder=new StringBuilder();
-
-        //    stringBuilder.Append("Where ");
-
-        //    if (!string.IsNullOrEmpty(filter.DepartureStation) && !string.IsNullOrEmpty(filter.ArrivalStation))
-        //    {
-        //        stringBuilder.AppendLine(
-        //            $"(bs.[Name]=@Param1 and rs.TypeStopId={(int) TypeStopEnum.Departure}) and ((bs.[Name]=@Param2 and rs.TypeStopId={(int) TypeStopEnum.Arrival}))");
-        //    }
-        //    else if (!string.IsNullOrEmpty(filter.DepartureStation))
-        //    {
-        //        stringBuilder.AppendLine(
-        //            $"bs.[Name]=@Param1 and rs.TypeStopId={(int)TypeStopEnum.Departure}))");
-        //    }
-        //    else if (!string.IsNullOrEmpty(filter.ArrivalStation))
-        //    {
-        //        stringBuilder.AppendLine(
-        //            $"bs.[Name]=@Param1 and rs.TypeStopId={(int)TypeStopEnum.Arrival}))");
-        //    }
-
-        //    stringBuilder.AppendLine($"{(stringBuilder.Length > 0 ? "and " : "")}tt.Departure >= @Param3");
-
-        //    return stringBuilder.ToString();
-        //}
-
-        //private List<SqlParameter> GetParametersByFilter(SearchRouteFilterModel filter)
-        //{
-        //    List<SqlParameter> parameters = new List<SqlParameter>();
-
-        //    if (!string.IsNullOrEmpty(filter.DepartureStation) && !string.IsNullOrEmpty(filter.ArrivalStation))
-        //    {
-        //        parameters.Add(new SqlParameter("@Param1", filter.DepartureStation));
-        //        parameters.Add(new SqlParameter("@Param2", filter.ArrivalStation));
-
-        //    }
-        //    else if (!string.IsNullOrEmpty(filter.DepartureStation))
-        //    {
-        //        parameters.Add(new SqlParameter("@Param1", filter.DepartureStation));
-        //    }
-        //    else if (!string.IsNullOrEmpty(filter.ArrivalStation))
-        //    {
-        //        parameters.Add(new SqlParameter("@Param2", filter.ArrivalStation));
-        //    }
-
-        //    parameters.Add(new SqlParameter("@Param3", filter.DepartureDate));
-
-        //    return parameters;
-        //}
 
         #endregion
     }

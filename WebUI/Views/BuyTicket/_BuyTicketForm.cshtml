@@ -27,8 +27,10 @@
         <div class="col-md-12">
             <div class="col-md-3"></div>
             <div class="col-md-6" align="center">
-                @using (Html.BeginForm("Checkout", "BuyTicket", FormMethod.Post, new {role = "form"}))
+                @using (Ajax.BeginForm("Checkout", null, new AjaxOptions{HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure", UpdateTargetId= "result" }, new {role = "form"}))
                 {
+                    @Html.HiddenFor(h=>h.TameTableId)
+                    @Html.HiddenFor(h=>h.Quantity)
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <h3 class="text-on-pannel text-primary">

@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
 
 namespace WebUI.Controllers
 {
     public class BuyTicketController : Controller
     {
+        private readonly IBuyTicketService _buyTicketService;
+
+        public BuyTicketController(IBuyTicketService buyTicketService)
+        {
+            _buyTicketService = buyTicketService;
+        }
+
+
         [HttpPost]
         public ActionResult BuyTicket(TimeTableViewModel model)
         {
@@ -29,7 +38,18 @@ namespace WebUI.Controllers
         [HttpPost]
         public ActionResult Checkout(BuyTicketViewModel model)
         {
-            return new EmptyResult();
+            var result = _buyTicketService.CheckoutTicket(model);
+
+            if (result.Successed)
+            {
+                return PartialView("_CheckoutFailed");
+            }
+
+            return Json(new
+            {
+                Error =
+                "Неудалось провести операцию, так как запрашиваемое количество билетов превышает количество доступных!"
+            });
         }
     }
 }

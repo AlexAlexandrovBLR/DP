@@ -12,6 +12,8 @@ namespace BusStation.Data.Context
     {
         protected override void Seed(BusStationContext context)
         {
+            #region Add Route
+
             BusStop busStopBrest = new BusStop
             {
                 Name = "Брест",
@@ -191,26 +193,34 @@ namespace BusStation.Data.Context
                 routeGomelArrival
             });
 
+
+            #endregion
+
+
             TimeTable timeTableGrodno = new TimeTable
             {
                 Arrival = DateTime.Now.AddHours(4),
-                Departure = DateTime.Now
+                Departure = DateTime.Now,
+                Seats = routeNumTwo.NumberOfSeats
             };
 
             TimeTable timeTableGrodnoTwo = new TimeTable
             {
                 Arrival = DateTime.Now.AddHours(7),
-                Departure = DateTime.Now.AddHours(5)
+                Departure = DateTime.Now.AddHours(5),
+                Seats = routeNumTwo.NumberOfSeats
             };
             TimeTable timeTableGrodnoThree = new TimeTable
             {
                 Arrival = DateTime.Now.AddMonths(-1).AddHours(7),
-                Departure = DateTime.Now.AddMonths(-1).AddHours(5)
+                Departure = DateTime.Now.AddMonths(-1).AddHours(5),
+                Seats = routeNumTwo.NumberOfSeats
             };
             TimeTable timeTableGrodnoFour = new TimeTable
             {
                 Arrival = DateTime.Now.AddMonths(-3).AddHours(7),
-                Departure = DateTime.Now.AddMonths(-3).AddHours(5)
+                Departure = DateTime.Now.AddMonths(-3).AddHours(5),
+                Seats = routeNumTwo.NumberOfSeats
             };
 
             routeNumTwo.TimeTables.Add(timeTableGrodno);

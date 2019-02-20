@@ -24,14 +24,36 @@
     </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>@Model.DepartureStop</td>
-            <td>@Model.ArrivalStop</td>
-            <td>@Model.DepartureDate.ToString("dd.MM.yyyy") @Model.DepartureDate.ToString("t")</td>
-            <td>@Model.Quantity</td>
-            <td>@Model.Amount</td>
-        </tr>
+    <tr>
+        <td>@Model.DepartureStop</td>
+        <td>@Model.ArrivalStop</td>
+        <td>@Model.DepartureDate.ToString("dd.MM.yyyy") @Model.DepartureDate.ToString("t")</td>
+        <td>@Model.Quantity</td>
+        <td>@Model.Amount</td>
+    </tr>
     </tbody>
 </table>
 
-@Html.Partial("_BuyTicketForm", Model)
+<div id="result">
+    @Html.Partial("_BuyTicketForm", Model)
+</div>
+
+
+@section scripts
+{
+    
+    <script>
+
+        function OnSuccess(data) {
+            if (!!data.Error) {
+                alertify.error(data.Error);
+            }
+        };
+
+        function OnFailure() {
+            alertify.error('Во время проведения операции произошла ошибка. Попробуйте позже.');
+        };
+
+    </script>
+
+}

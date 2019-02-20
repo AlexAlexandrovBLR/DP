@@ -330,6 +330,7 @@
     <Content Include="Views\Administration\AddTimeTables.cshtml" />
     <Content Include="Views\Administration\RemoveTimeTables.cshtml" />
     <Content Include="Views\Administration\TimeTables.cshtml" />
+    <Content Include="Views\BuyTicket\_CheckoutFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
