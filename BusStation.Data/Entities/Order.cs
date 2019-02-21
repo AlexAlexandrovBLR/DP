@@ -1,15 +1,18 @@
 ﻿
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace BusStation.Data.Entities
 {
     public class Order
     {      
         public int Id { get; set; }
-        public int RouteId { get; set; }
+        [ForeignKey("User")]
         public int UserId { get; set; }
-        public int StatusOrderId { get; set; }
+        public string Description { get; set; }
+        public DateTime OperationDate { get; set; }
+        public DateTime DepartureDate { get; set; }
 
-        public virtual Route Route { get; set; }
         public virtual User User { get; set; }
-        public virtual StatusOrder StatusOrder { get; set; }
     }
 }

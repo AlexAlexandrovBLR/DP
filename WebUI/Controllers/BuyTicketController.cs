@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WebUI.Controllers
 {
@@ -38,7 +39,8 @@ namespace WebUI.Controllers
         [HttpPost]
         public ActionResult Checkout(BuyTicketViewModel model)
         {
-            var result = _buyTicketService.CheckoutTicket(model);
+            
+            var result = _buyTicketService.CheckoutTicket(model, User.Identity.Name);
 
             if (result.Successed)
             {

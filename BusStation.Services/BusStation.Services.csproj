@@ -90,6 +90,7 @@
     <Compile Include="Interfaces\IGetRouteService.cs" />
     <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Models\AddTimeTableViewModel.cs" />
+    <Compile Include="Models\Dto\OrderModelDto.cs" />
     <Compile Include="Models\RemoveTimeTableViewModel.cs" />
     <Compile Include="Models\BusStopDetailsViewModel.cs" />
     <Compile Include="Models\BusStopViewModel.cs" />
@@ -114,6 +115,8 @@
     <Compile Include="Models\TimeTableViewModel.cs" />
     <Compile Include="Models\UpdateBusStopsViewModel.cs" />
     <Compile Include="Models\UpdateRoteViewModel.cs" />
+    <Compile Include="Models\UserCurrentOrderViewModel.cs" />
+    <Compile Include="Models\UserHistoryViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Ninject\NinjectBindings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

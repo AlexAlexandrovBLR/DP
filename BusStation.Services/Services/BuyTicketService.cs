@@ -1,19 +1,24 @@
-﻿using BusStation.Common;
+﻿using System;
+using System.Linq;
+using BusStation.Common;
 using BusStation.Domain.Interfaces;
 using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
+using BusStation.Services.Models.Dto;
 
 namespace BusStation.Services.Services
 {
     public class BuyTicketService: IBuyTicketService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAccountService _accountService;
 
         #region ctor
 
-        public BuyTicketService(IUnitOfWork unitOfWork)
+        public BuyTicketService(IUnitOfWork unitOfWork, IAccountService accountService)
         {
             _unitOfWork = unitOfWork;
+            _accountService = accountService;
         }
 
         #endregion
@@ -21,7 +26,7 @@ namespace BusStation.Services.Services
 
         #region Public Methods
 
-        public OperationResult CheckoutTicket(BuyTicketViewModel model)
+        public OperationResult CheckoutTicket(BuyTicketViewModel model, string userName)
         {
             if (CheckAvailability(model.TameTableId, model.Quantity))
             {
@@ -33,7 +38,14 @@ namespace BusStation.Services.Services
 
                     if (timeTable.Seats >= 0)
                     {
-                        return _unitOfWork.Save();
+                        var result = _unitOfWork.Save();
+
+                        if (result.Successed)
+                        {
+                            var order = GetOrderModel(model);
+
+                            return result;
+                        }
                     }
                 }
             }
@@ -55,6 +67,19 @@ namespace BusStation.Services.Services
             var timeTable = _unitOfWork.TimeTablesRepository.GetById(id);
 
             return quantity <= timeTable?.Seats;
+        }
+
+        private OrderModelDto GetOrderModel(BuyTicketViewModel model)
+        {
+            OrderModelDto result = new OrderModelDto
+            {
+                DepartureDate = model.DepartureDate,
+                Description =
+                    $"{model.DepartureStop} - {model.ArrivalStop}, {model.DepartureDate:d}, в количестве {model.Quantity} шт.",
+                OperationDate = DateTime.Now
+            };
+
+            return result;
         }
 
         #endregion

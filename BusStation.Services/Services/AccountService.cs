@@ -6,6 +6,7 @@ using BusStation.Domain.Interfaces;
 using BusStation.Services.Enums;
 using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
+using BusStation.Services.Models.Dto;
 
 namespace BusStation.Services.Services
 {
@@ -96,5 +97,21 @@ namespace BusStation.Services.Services
                 };
             }
         }
+
+        public OperationResult AddOrderToHistoryUser(OrderModelDto model, string userNmae)
+        {
+            Order order = new Order
+            {
+                DepartureDate = model.DepartureDate,
+                Description = model.Description,
+                OperationDate = model.OperationDate,
+                User = _unitOfWork.UsersRepository.GetAll().FirstOrDefault(f=>f.Email == userNmae)
+            };
+
+            _unitOfWork.OrdersRepository.Add(order);
+
+            return _unitOfWork.Save();
+        }
+
     }
 }

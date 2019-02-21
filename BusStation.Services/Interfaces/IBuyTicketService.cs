@@ -5,6 +5,6 @@ namespace BusStation.Services.Interfaces
 {
     public interface IBuyTicketService
     {
-        OperationResult CheckoutTicket(BuyTicketViewModel model);
+        OperationResult CheckoutTicket(BuyTicketViewModel model, string userName);
     }
 }
