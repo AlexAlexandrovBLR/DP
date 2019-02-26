@@ -57,7 +57,6 @@
     <Compile Include="Repositories\RolesRepository.cs" />
     <Compile Include="Repositories\RoutesRepository.cs" />
     <Compile Include="Repositories\RouteStopsRepository.cs" />
-    <Compile Include="Repositories\StatusOrdersRepository.cs" />
     <Compile Include="Repositories\TimeTablesRepository.cs" />
     <Compile Include="Repositories\TypeStopsRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />

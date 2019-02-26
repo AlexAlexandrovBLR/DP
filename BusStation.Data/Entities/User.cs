@@ -23,6 +23,7 @@ namespace BusStation.Data.Entities
         public int RoleId { get; set; }
 
         public virtual Role Role { get; set; }
-        public virtual ICollection<TimeTable> TimeTables { get; set; } = new List<TimeTable>();
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
     }
 }

@@ -200,7 +200,7 @@ namespace BusStation.Data.Context
             TimeTable timeTableGrodno = new TimeTable
             {
                 Arrival = DateTime.Now.AddHours(4),
-                Departure = DateTime.Now,
+                Departure = DateTime.Now.AddHours(7),
                 Seats = routeNumTwo.NumberOfSeats
             };
 
@@ -233,14 +233,33 @@ namespace BusStation.Data.Context
             context.Roles.Add(roleAdmin);
             context.Roles.Add(new Role { Name = "User" });
 
-            context.Users.Add(new User
+            User admin = new User
             {
                 Email = "admin@admin.com",
                 Password = "AOuWU2uXEY7LEJGczeF5LR2d33ngJk4D3Hzg2IoFu8jBnIbseTs0zC+iLiC7s/Vkuw==",
                 Role = roleAdmin
-            });
+            };
 
+            
 
+            Order orderOneAdmin= new Order
+            {
+                DepartureDate = DateTime.Now.AddMonths(-7),
+                Description = $"Минск - Брест, {DateTime.Now.AddMonths(-7):g}, в количестве 1 шт.",
+                OperationDate = DateTime.Now.AddMonths(-8)
+            };
+
+            Order orderTwoAdmin = new Order
+            {
+                DepartureDate = DateTime.Now.AddMonths(-1),
+                Description = $"Минск - Витебск, {DateTime.Now.AddMonths(-1):g}, в количестве 1 шт.",
+                OperationDate = DateTime.Now.AddMonths(-2)
+            };
+
+            admin.Orders.Add(orderOneAdmin);
+            admin.Orders.Add(orderTwoAdmin);
+
+            context.Users.Add(admin);
             context.SaveChanges();
         }
     }

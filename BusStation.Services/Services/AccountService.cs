@@ -98,14 +98,14 @@ namespace BusStation.Services.Services
             }
         }
 
-        public OperationResult AddOrderToHistoryUser(OrderModelDto model, string userNmae)
+        public OperationResult AddOrderToHistoryUser(OrderModelDto model, string userName)
         {
             Order order = new Order
             {
                 DepartureDate = model.DepartureDate,
                 Description = model.Description,
                 OperationDate = model.OperationDate,
-                User = _unitOfWork.UsersRepository.GetAll().FirstOrDefault(f=>f.Email == userNmae)
+                User = _unitOfWork.UsersRepository.GetAll().FirstOrDefault(f=>f.Email == userName)
             };
 
             _unitOfWork.OrdersRepository.Add(order);

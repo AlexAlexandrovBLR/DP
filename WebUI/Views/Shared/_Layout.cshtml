@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Каталог производителей автозапчастей</title>
     @Styles.Render("~/Content/css")
@@ -14,40 +14,15 @@
 </head>
 <body>
 
-@*<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink("Автобусные пассажирские перевозки", "Index", "Home")
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    
-                <li>@Html.ActionLink("Add new event", "AddEvent", "Manage")</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
-    </div>
-</div>*@
+<div id="wrapper">
+    <div class="overlay"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
 
-
-    <div id="wrapper">
-        <div class="overlay"></div>
-
-       
-
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-            
-            @if (Request.IsAuthenticated)
-            {
+        @if (Request.IsAuthenticated)
+        {
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand">
-                    @Html.ActionLink("Автобусные пассажирские перевозки", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Автобусные пассажирские перевозки", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
                 </li>
                 <li>
                     <a href="/Account/UserInfo">Личный кабинет</a>
@@ -59,64 +34,91 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Администрирование <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li class="dropdown-header">Административные операции</li>
-                            <li><a href="/Administration/AddNewStops">Добавление новых остановок</a></li>
-                            <li><a href="/Administration/UpdateBusStops">Редактировать остановки</a></li>
-                            <li><a href="/Administration/RemoveBusStop">Удаление остановок</a></li>
-                            <li><a href="/Administration/AddRoute">Добавление маршрутов</a></li>
-                            <li><a href="/Administration/UpdateRoutes">Редактирование маршрутов</a></li>
-                            <li><a href="/Administration/RemoveRoute">Удаление маршрутов</a></li>
-                            <li><a href="/Administration/AddTimeTables">Добавление расписаний</a></li>
-                            <li><a href="/Administration/RemoveTimeTables">Удаление расписаний</a></li>
+                            <li>
+                                <a href="/Administration/AddNewStops">Добавление новых остановок</a>
+                            </li>
+                            <li>
+                                <a href="/Administration/UpdateBusStops">Редактировать остановки</a>
+                            </li>
+                            <li>
+                                <a href="/Administration/RemoveBusStop">Удаление остановок</a>
+                            </li>
+                            <li>
+                                <a href="/Administration/AddRoute">Добавление маршрутов</a>
+                            </li>
+                            <li>
+                                <a href="/Administration/UpdateRoutes">Редактирование маршрутов</a>
+                            </li>
+                            <li>
+                                <a href="/Administration/RemoveRoute">Удаление маршрутов</a>
+                            </li>
+                            <li>
+                                <a href="/Administration/AddTimeTables">Добавление расписаний</a>
+                            </li>
+                            <li>
+                                <a href="/Administration/RemoveTimeTables">Удаление расписаний</a>
+                            </li>
                         </ul>
                     </li>
                 }
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Билеты <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Сведения о билетах</li>
+                        <li>
+                            <a href="/Order/CurrentOrders">Текущие билеты</a>
+                        </li>
+                        <li>
+                            <a href="/Order/HistoryOrders">История покупок билетов</a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li>
                     <a href="/Account/LogOff">Выйти</a>
                 </li>
             </ul>
-
-            }
-            else
-            {
+        }
+        else
+        {
                 @*@Html.ActionLink("Автобусные пассажирские перевозки", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
 
-                Html.RenderPartial("~/Views/Account/_Login.cshtml", new LoginViewModel());
-            }
-            
-        </nav>
+            Html.RenderPartial("~/Views/Account/_Login.cshtml", new LoginViewModel());
+        }
 
-       
+    </nav>
 
 
-            <!-- Sidebar -->
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper" style="padding-top: 20px">
-            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-                <span class="hamb-top"></span>
-                <span class="hamb-middle"></span>
-                <span class="hamb-bottom"></span>
-            </button>
-            <div class="container body-content">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - Автобусные пассажирские перевозки</p>
-                </footer>
-            </div>
+    <!-- Sidebar -->
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper" style="padding-top: 20px">
+        <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
+        <div class="container body-content">
+            @RenderBody()
+            <hr/>
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Автобусные пассажирские перевозки</p>
+            </footer>
         </div>
-        <!-- /#page-content-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
+    <!-- /#page-content-wrapper -->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/fancymenu")
-    @Scripts.Render("~/bundles/alertify")
+</div>
+<!-- /#wrapper -->
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/fancymenu")
+@Scripts.Render("~/bundles/alertify")
 <script src="https://rawgit.com/RobinHerbots/Inputmask/4.x/dist/jquery.inputmask.bundle.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    @RenderSection("scripts", required: false)
+@RenderSection("scripts", required: false)
 </body>
 </html>

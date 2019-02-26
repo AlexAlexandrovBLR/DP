@@ -42,7 +42,8 @@ namespace BusStation.Services.Services
 
                         if (result.Successed)
                         {
-                            var order = GetOrderModel(model);
+                            var order=GetOrderModel(model);
+                            _accountService.AddOrderToHistoryUser(order, userName);
 
                             return result;
                         }
@@ -75,7 +76,7 @@ namespace BusStation.Services.Services
             {
                 DepartureDate = model.DepartureDate,
                 Description =
-                    $"{model.DepartureStop} - {model.ArrivalStop}, {model.DepartureDate:d}, в количестве {model.Quantity} шт.",
+                    $"{model.DepartureStop} - {model.ArrivalStop}, {model.DepartureDate:g}, в количестве {model.Quantity} шт.",
                 OperationDate = DateTime.Now
             };
 

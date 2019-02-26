@@ -1,42 +1,39 @@
 ﻿@model  BusStation.Services.Models.TimeTableViewModel
 
+@{string date=Model.DepartureDate.ToString("g");}
 
 <div class="well">
-    @using (Html.BeginForm("BuyTicket", "BuyTicket", FormMethod.Post, new {@class="form-horizontal"}))
+    @using (Html.BeginForm("BuyTicket", "BuyTicket", FormMethod.Post, new { @class = "form-horizontal" }))
     {
-        @Html.HiddenFor(h=>h.TameTableId)
-        @Html.HiddenFor(h=>h.RouteId)
-        @Html.HiddenFor(h=>h.DepartureDate)
-        @Html.HiddenFor(h=>h.DepartureStop)
-        @Html.HiddenFor(h=>h.ArrivalStop)
-        @Html.HiddenFor(h=>h.Price)
+        @Html.HiddenFor(h => h.TameTableId)
+        @Html.HiddenFor(h => h.RouteId)
+        <input type="hidden" name="DepartureDate" id="DepartureDate" value="@Model.DepartureDate.ToString("g")"/>
+        @*@Html.HiddenFor(h => h.DepartureDate)*@
+        @Html.HiddenFor(h => h.DepartureStop)
+        @Html.HiddenFor(h => h.ArrivalStop)
+        @Html.HiddenFor(h => h.Price)
 
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2">
-                    @Html.LabelFor(l=>l.DepartureStop, Model.DepartureStop)
+                    @Html.LabelFor(l => l.DepartureStop, Model.DepartureStop)
                 </div>
                 <div class="col-md-2">
-                    @Html.LabelFor(l=>l.ArrivalStop, Model.ArrivalStop)
+                    @Html.LabelFor(l => l.ArrivalStop, Model.ArrivalStop)
                 </div>
                 <div class="col-md-2">
-                    @Html.LabelFor(l=>l.DepartureDate, Model.DepartureDate.ToString("dd.MM.yyyy"))
+                    @date
                 </div>
                 <div class="col-md-1">
                     <label>
-                        @Html.LabelFor(l=>l.DepartureDate, Model.DepartureDate.ToString("t"))
+                        @Html.LabelFor(l => l.Seats, Model.Seats.ToString())
                     </label>
                 </div>
-                <div class="col-md-1">
-                    <label>
-                        @Html.LabelFor(l=>l.Seats, Model.Seats.ToString())
-                    </label>
+                <div class="col-md-2">
+                    @Html.LabelFor(l => l.Price, Model.Price.ToString("F"))
                 </div>
                 <div class="col-md-1">
-                    @Html.LabelFor(l=>l.Price, Model.Price.ToString("F"))
-                </div>
-                <div class="col-md-1">
-                    @Html.TextBoxFor(t=>t.Quantity, new { @class="form-control", style= "max-width:50px" })
+                    @Html.TextBoxFor(t => t.Quantity, new { @class = "form-control", style = "max-width:50px" })
                 </div>
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-default">Купить</button>

@@ -88,9 +88,11 @@
     <Compile Include="Interfaces\IAdministrationService.cs" />
     <Compile Include="Interfaces\IBuyTicketService.cs" />
     <Compile Include="Interfaces\IGetRouteService.cs" />
+    <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\ISearchService.cs" />
     <Compile Include="Models\AddTimeTableViewModel.cs" />
     <Compile Include="Models\Dto\OrderModelDto.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\RemoveTimeTableViewModel.cs" />
     <Compile Include="Models\BusStopDetailsViewModel.cs" />
     <Compile Include="Models\BusStopViewModel.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Services\AdministrationService.cs" />
     <Compile Include="Services\BuyTicketService.cs" />
     <Compile Include="Services\GetRouteService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\SearchServise.cs" />
   </ItemGroup>
   <ItemGroup>

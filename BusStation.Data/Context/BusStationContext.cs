@@ -24,7 +24,6 @@ namespace BusStation.Data.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<RouteStop> RouteStops { get; set; }
-        public DbSet<StatusOrder> StatusOrders { get; set; }
         public DbSet<TimeTable> TimeTables { get; set; }
         public DbSet<TypeStop> TypeStops { get; set; }
         public DbSet<User> Users { get; set; }

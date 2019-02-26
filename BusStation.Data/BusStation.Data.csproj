@@ -54,7 +54,6 @@
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Route.cs" />
     <Compile Include="Entities\RouteStop.cs" />
-    <Compile Include="Entities\StatusOrder.cs" />
     <Compile Include="Entities\TimeTable.cs" />
     <Compile Include="Entities\TypeStop.cs" />
     <Compile Include="Entities\User.cs" />

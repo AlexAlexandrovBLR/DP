@@ -1,0 +1,38 @@
+﻿@model List<BusStation.Services.Models.OrderViewModel>
+
+@{
+    ViewBag.Title = "HistoryOrders";
+    int i = 0;
+}
+
+<h2 align="center">История покупки белетов</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>№ п/п</th>
+            <th>Дата и время покупки</th>
+            <th>Описание</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(++i).</td>
+                <td>@item.OperationDate.ToString("g")</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <h4 align="center">Вы не имеет билетов с истекшей датой отправления</h4>
+}
+
+<p align="center">@Html.ActionLink("На главную", "Index", "Home")</p>

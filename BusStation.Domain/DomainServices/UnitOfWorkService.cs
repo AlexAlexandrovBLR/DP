@@ -14,7 +14,6 @@ namespace BusStation.Domain.DomainServices
         private OrdersRepository _ordersRepository;
         private RouteStopsRepository _routeStopsRepository;
         private RoutesRepository _routesRepository;
-        private StatusOrdersRepository _statusOrdersRepository;
         private TimeTablesRepository _timeTablesRepository;
         private TypeStopsRepository _typeStopsRepository;
         private UsersRepository _usersRepository;
@@ -38,9 +37,6 @@ namespace BusStation.Domain.DomainServices
 
         public IGenericBaseService<RouteStop> RouteStopssRepository =>
             _routeStopsRepository ?? new RouteStopsRepository(_busStationContext);
-
-        public IGenericBaseService<StatusOrder> StatusOrdersRepository =>
-            _statusOrdersRepository ?? new StatusOrdersRepository(_busStationContext);
 
         public IGenericBaseService<TimeTable> TimeTablesRepository =>
             _timeTablesRepository ?? new TimeTablesRepository(_busStationContext);

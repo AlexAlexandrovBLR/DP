@@ -14,7 +14,6 @@ namespace BusStation.Data.Entities
         public int NumberOfSeats { get; set; }
         public decimal Price { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
         public virtual ICollection<RouteStop> RouteStops { get; set; } = new List<RouteStop>();
         public virtual ICollection<TimeTable> TimeTables { get; set; } = new List<TimeTable>();
     }

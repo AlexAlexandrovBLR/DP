@@ -211,6 +211,7 @@
     <Compile Include="Controllers\BuyTicketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -331,6 +332,8 @@
     <Content Include="Views\Administration\RemoveTimeTables.cshtml" />
     <Content Include="Views\Administration\TimeTables.cshtml" />
     <Content Include="Views\BuyTicket\_CheckoutFailed.cshtml" />
+    <Content Include="Views\Order\CurrentOrders.cshtml" />
+    <Content Include="Views\Order\HistoryOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
