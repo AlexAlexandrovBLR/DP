@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using BusStation.Services.Interfaces;
 using BusStation.Services.Models;
@@ -24,6 +25,10 @@ namespace WebUI.Controllers
         
         public ActionResult Search(SearchRouteFilterModel filter, int page = 1)
         {
+            var time = DateTime.Now.TimeOfDay;
+
+            filter.DepartureDate = filter.DepartureDate.Add(time);
+
             var res=_searchService.GetSearchResult(filter);
 
             ListTimeTableViewModel model = res != null

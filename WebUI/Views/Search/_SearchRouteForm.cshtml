@@ -15,7 +15,7 @@
 
 <fieldset class="scheduler-border"  >
     <legend class="scheduler-border">Поиск</legend>
-    @using (@Html.BeginForm("Search", "Search", FormMethod.Post, new {@class = "form-horizontal" ,@style= "margin-left:23px" }))
+    @using (@Html.BeginForm("Search", "Search", FormMethod.Post, new {@class = "form-horizontal" ,@style= "margin-left:23px", id="searchForm" }))
     {
         <div class="row">
             <div class="form-group">

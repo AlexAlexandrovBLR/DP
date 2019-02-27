@@ -21,9 +21,9 @@ function init() {
 
 function getRoutes(geoMap) {
     $.ajax({
-        url: 'route/getroutes',
+        url: '/route/getroutes',
         method: 'POST',
-        success: function (data) {
+        success: function(data) {
             setRoutes(data, geoMap);
         }
     });
@@ -35,33 +35,53 @@ function setRoutes(data, geoMap) {
         var departurePoin = item.CoordinatesDeparture;
         var arrivalPoint = item.CoordinatesArrival;
 
+        var balloonLayout = ymaps.templateLayoutFactory.createClass(
+            "<div>", {
+                build: function () {
+                    this.constructor.superclass.build.call(this);
+                }
+            }
+        );
+
         var multiRoute = new ymaps.multiRouter.MultiRoute({
                 // Точки маршрута. Точки могут быть заданы как координатами, так и адресом. 
                 referencePoints: [
                     [departurePoin.Latitude, departurePoin.Longitude],
                     [arrivalPoint.Latitude, arrivalPoint.Longitude],
-            ],
+                ],
                 params: {
                     // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
                     results: 1
                 }
             },
-
             {
                 options: {
                     // Автоматически устанавливать границы карты так,
                     // чтобы маршрут был виден целиком.
                     boundsAutoApply: false
-                }
+                },
+                balloonLayout: balloonLayout
             });
 
-        multiRoute.model.events.once("requestsuccess", function () {
-            var yandexWaStartyPoint = multiRoute.getWayPoints().get(0);
-            var yandexWaFinishPoint = multiRoute.getWayPoints().get(1);
-            setNameStop(item.DepartureBusStopName, yandexWaStartyPoint);
-            setNameStop(item.ArrivalBusStopName, yandexWaFinishPoint);
-        });
-       
+
+        multiRoute.model.events.once("requestsuccess",
+            function() {
+                var yandexWaStartyPoint = multiRoute.getWayPoints().get(0);
+                var yandexWaFinishPoint = multiRoute.getWayPoints().get(1);
+                setNameStop(item.DepartureBusStopName, yandexWaStartyPoint);
+                setNameStop(item.ArrivalBusStopName, yandexWaFinishPoint);
+            });
+
+        multiRoute.events.add('click',
+            function(e) {
+                var start = multiRoute.getWayPoints().get(0).properties.get(0).myPosition;
+                var stop = multiRoute.getWayPoints().get(1).properties.get(0).myPosition;
+
+                $('#DepartureStation').val(start);
+                $("#ArrivalStation").val(stop);
+                $('#DepartureDate').val(new Date().toJSON().slice(0, 10));
+                $('#searchForm').submit();
+            });
 
         geoMap.geoObjects.add(multiRoute);
     });
@@ -86,7 +106,7 @@ function getNewPoints(name, coordinates) {
             // Свойства.
             properties: {
                 // Контент метки.
-                iconContent: name   
+                iconContent: name
             }
         },
         {
