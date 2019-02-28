@@ -54,6 +54,22 @@
             alertify.error('Во время проведения операции произошла ошибка. Попробуйте позже.');
         };
 
+        $('#PassportNumber').inputmask({ "mask": "AA 9999999" });
+        $('#CardNumber').inputmask({ 'mask': '9999 9999 9999 9999' });
+        $('#ValidityPeriod').inputmask({ 'mask': '99/99' });
+        $('#Cvv').inputmask({ 'mask': '999' });
+
+
     </script>
 
 }
+
+
+@*@section scripts
+{
+    
+    <script>
+        $('#PassportNumber').inputmask({ "mask": "(999) 999-99-99" });
+    </script>
+    
+}*@

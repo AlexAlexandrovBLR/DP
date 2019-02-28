@@ -58,11 +58,11 @@
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(l => l.ValidityPeriod)
-                                @Html.TextBoxFor(t => t.ValidityPeriod, new {@class = "form-control", placeholder = "Введите срок действия платежной карты"})
+                                @Html.TextBoxFor(t => t.ValidityPeriod, new {@class = "form-control masked", placeholder = "Введите срок действия платежной карты", pattern=@"(1[0-2]|0[1-9])\/(1[5-9]|2\d)", data_valid_example="05/18"})
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(l => l.Cvv)
-                                @Html.TextBoxFor(t => t.Cvv, new {@class = "form-control", placeholder = "Введите CVV код платежной карты (3 цифры с обратной стороны)"})
+                                @Html.TextBoxFor(t => t.Cvv, new {@class = "form-control", placeholder = "Введите CVV код платежной карты (3 цифры с обратной стороны)", inputmask = "'mask': '999'" })
                             </div>
                             <button type="submit" class="btn btn-info">Оплатить</button>
                         </div>

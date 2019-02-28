@@ -11,14 +11,16 @@ namespace BusStation.Services.Models.InputModels
 {
     public class SearchRouteFilterModel
     {
+        [Required(ErrorMessage = "Поле обязательно!")]
         [DisplayName("Откуда:")]
         public string DepartureStation { get; set; }
 
+        [Required(ErrorMessage = "Поле обязательно!")]
         [DisplayName("Куда:")]
         public string ArrivalStation { get; set; }
 
         [DisplayName("Дата:")]
-        [Required(ErrorMessage = "Поле дата обязательно")]
+        [Required(ErrorMessage = "Поле дата обязательно!")]
         public DateTime DepartureDate { get; set; }
     }
 }

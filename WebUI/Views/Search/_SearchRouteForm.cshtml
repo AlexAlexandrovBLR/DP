@@ -13,27 +13,32 @@
     }
 </style>
 
-<fieldset class="scheduler-border"  >
+<fieldset class="scheduler-border">
     <legend class="scheduler-border">Поиск</legend>
-    @using (@Html.BeginForm("Search", "Search", FormMethod.Post, new {@class = "form-horizontal" ,@style= "margin-left:23px", id="searchForm" }))
+    @using (@Html.BeginForm("Search", "Search", FormMethod.Post, new { @class = "form-horizontal", @style = "margin-left:23px", id = "searchForm" }))
     {
         <div class="row">
+            @Html.ValidationSummary(true)
+
             <div class="form-group">
-                @Html.LabelFor(l => l.DepartureStation, new { @class = "col-xs-2 control-label" })
+                @Html.LabelFor(l => l.DepartureStation, new {@class = "col-xs-2 control-label"})
                 <div class="col-xs-10">
-                    @Html.TextBoxFor(t => t.DepartureStation, new {@class="form-control" })
+                    @Html.ValidationMessageFor(m=>m.DepartureStation)
+                    @Html.TextBoxFor(t => t.DepartureStation, new {@class = "form-control"})
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(l => l.ArrivalStation, new { @class = "col-xs-2 control-label" })
+                @Html.LabelFor(l => l.ArrivalStation, new {@class = "col-xs-2 control-label"})
                 <div class="col-xs-10">
-                    @Html.TextBoxFor(t => t.ArrivalStation, new {@class="form-control" })
+                    @Html.ValidationMessageFor(m=>m.ArrivalStation)
+                    @Html.TextBoxFor(t => t.ArrivalStation, new {@class = "form-control"})
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(l => l.DepartureDate, new { @class = "col-xs-2 control-label" })
+                @Html.LabelFor(l => l.DepartureDate, new {@class = "col-xs-2 control-label"})
                 <div class="col-xs-10">
-                    @Html.TextBoxFor(t => t.DepartureDate, new {@class="form-control", type="date" })
+                    @Html.ValidationMessageFor(m=>m.DepartureDate)
+                    @Html.TextBoxFor(t => t.DepartureDate, new {@class = "form-control", type = "date", min=DateTime.Now.ToString("yyyy-MM-dd")})
                 </div>
             </div>
             <div class="form-group">
