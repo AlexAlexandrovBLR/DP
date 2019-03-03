@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusStation.Services.Models.Dto
 {
@@ -9,9 +10,11 @@ namespace BusStation.Services.Models.Dto
         [DisplayName("Маршрут")]
         public int RouteId { get; set; }
 
+        [Required]
         [DisplayName("Дата")]
         public DateTime DepartureDate { get; set; }
 
+        [Required]
         [DisplayName("Время")]
         public TimeSpan DepartureTime { get; set; }
 

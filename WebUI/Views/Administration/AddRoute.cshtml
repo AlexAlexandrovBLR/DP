@@ -1,7 +1,7 @@
 ﻿@model BusStation.Services.Models.RouteViewModel
 
 @{
-    ViewBag.Title = "AddRoute";
+    ViewBag.Title = "Добавление новых маршрутов";
 }
 
 <h2 align="center">Добавление новых маршрутов</h2>
@@ -16,18 +16,22 @@
                 </div>
                 @Html.LabelFor(l => l.RouteModels[0].StopId, new {@class = "col-md-1 control-label"})
                 <div class="col-md-2">
+                    @Html.ValidationMessageFor(t => t.RouteModels[0].StopId)
                     @Html.DropDownListFor(t => t.RouteModels[0].StopId, Model.Routes, new {@class = "form-control"})
                 </div>
                 @Html.LabelFor(l => l.RouteModels[0].RouteNumber, new {@class = "col-md-1 control-label"})
                 <div class="col-md-1">
+                    @Html.ValidationMessageFor(t => t.RouteModels[0].RouteNumber)
                     @Html.TextBoxFor(t => t.RouteModels[0].RouteNumber, new {@class = "form-control"})
                 </div>
                 @Html.LabelFor(l => l.RouteModels[0].NumberOfSeats, new {@class = "col-md-1 control-label"})
                 <div class="col-md-1">
+                    @Html.ValidationMessageFor(t => t.RouteModels[0].NumberOfSeats)
                     @Html.TextBoxFor(t => t.RouteModels[0].NumberOfSeats, new {@class = "form-control"})
                 </div>
                 @Html.LabelFor(l => l.RouteModels[0].Price, new {@class = "col-md-1 control-label"})
                 <div class="col-md-1">
+                    @Html.ValidationMessageFor(t => t.RouteModels[0].Price)
                     @Html.TextBoxFor(t => t.RouteModels[0].Price, new {@class = "form-control"})
                 </div>
             </div>
@@ -56,6 +60,8 @@
                 addIndexToAttribute(fields);
                 $('#dynamicFields').append(fields.html());
                 $('#removeField').removeAttr('disabled');
+                $('form').data('validator', null);
+                $.validator.unobtrusive.parse($('form'));
             });
 
         $('#removeField').on('click',
@@ -71,7 +77,8 @@
                 if (fields.length ===2) {
                     $('#removeField').attr('disabled', 'disabled');
                 }
-
+                $('form').data('validator', null);
+                $.validator.unobtrusive.parse($('form'));
             });
 
         function addIndexToAttribute(originalFields) {
@@ -89,24 +96,28 @@
         }
 
         $('#routeForm').on('submit',
-            function(e) {
+            function (e) {
                 e.preventDefault();
-                var data = $(this).serialize();
+                if ($('#routeForm').valid()) {
+                    var data = $(this).serialize();
 
-                $.ajax({
-                    url: '/Administration/AddRoute',
-                    method: 'POST',
-                    data: data,
-                    success: function(data) {
-                        if (data.Successed) {
-                            alertify.success('Данные успешно Добавлены.', 2, function () {
-                                location.reload();
-                            });
-                        } else {
-                            alertify.error('Данные не добавлены! ' + data.Message);
-                        }                  
-                    }
-                });
+                    $.ajax({
+                        url: '/Administration/AddRoute',
+                        method: 'POST',
+                        data: data,
+                        success: function(data) {
+                            if (data.Successed) {
+                                alertify.success('Данные успешно Добавлены.', 2, function () {
+                                    location.reload();
+                                });
+                            } else {
+                                alertify.error('Данные не добавлены! ' + data.Message);
+                            }                  
+                        }
+                    });
+
+                }
+
             });
 
     </script>

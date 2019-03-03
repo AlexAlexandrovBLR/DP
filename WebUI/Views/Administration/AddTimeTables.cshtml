@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "AddTimeTables";
+    ViewBag.Title = "Добавление расписаний маршрутов";
 }
 
 <h2 align="center">Добавление расписаний маршрутов</h2>
@@ -18,11 +18,13 @@
                 </div>
                 @Html.LabelFor(l => l.TimeTables[0].DepartureDate, new {@class = "col-md-2 control-label"})
                 <div class="col-md-2">
+                    @Html.ValidationMessageFor(t => t.TimeTables[0].DepartureDate)
                     @Html.TextBoxFor(t => t.TimeTables[0].DepartureDate, new {@class = "form-control", type = "date"})
                 </div>
-                @Html.LabelFor(l => l.TimeTables[0].DepartureTime, new {@class = "col-md-2 control-label"})
+                @Html.LabelFor(l => l.TimeTables[0].DepartureTime, new {@class = "col-md-2 control-label", min = DateTime.Now.ToString("yyyy-MM-dd")})
                 <div class="col-md-2">
-                    @Html.TextBoxFor(t => t.TimeTables[0].DepartureTime, new {@class = "form-control", type="time"})
+                    @Html.ValidationMessageFor(t => t.TimeTables[0].DepartureTime)
+                    @Html.TextBoxFor(t => t.TimeTables[0].DepartureTime, new {@class = "form-control", type = "time"})
                 </div>
             </div>
         </div>
@@ -44,6 +46,8 @@
         var i = 1;
         $(document).ready(function () {
             originalFields = $('#dynamicFields').clone();  
+
+            $('#TimeTables_0__DepartureDate').val(new Date().toJSON().slice(0, 10));
         });
 
         $('#addField').on('click',
@@ -51,6 +55,11 @@
                 var fields = $(originalFields).clone();
                 addIndexToAttribute(fields);
                 $('#dynamicFields').append(fields.html());
+                $('#TimeTables_'+(i-1)+'__DepartureDate').val(new Date().toJSON().slice(0, 10));
+
+                $('form').data('validator', null);
+                $.validator.unobtrusive.parse($('form'));
+
                 $('#removeField').removeAttr('disabled');
             });
 
@@ -68,6 +77,8 @@
                     $('#removeField').attr('disabled', 'disabled');
                 }
 
+                $('form').data('validator', null);
+                $.validator.unobtrusive.parse($('form'));
             });
 
         function addIndexToAttribute(originalFields) {
@@ -78,26 +89,28 @@
 
 
                 $(this).attr('name', namePaths[0] + '[' + i + ']' + namePaths[1]);
-                $(this).attr('id', idPaths[0] +  i +  idPaths[1]);
+                $(this).attr('id', idPaths[0] + i + idPaths[1]);
             });
 
             i++;
         }
 
         $('#addTimeTable').on('click',
-            function() {
-                $.ajax({
-                    url: '/Administration/AddTimeTables',
-                    method: 'POST',
-                    data: $('#addTimeTableForm').serialize(),
-                    success: function(data) {
-                        if (data.Successed) {
-                            alertify.success('Данные успешно сохранены', 2, function() { location.reload(); });
-                        } else {
-                            alertify.error('Данные не сохранены! ' + data.Message);
+            function () {
+                if ($('#addTimeTableForm').valid()) {
+                    $.ajax({
+                        url: '/Administration/AddTimeTables',
+                        method: 'POST',
+                        data: $('#addTimeTableForm').serialize(),
+                        success: function(data) {
+                            if (data.Successed) {
+                                alertify.success('Данные успешно сохранены', 2, function() { location.reload(); });
+                            } else {
+                                alertify.error('Данные не сохранены! ' + data.Message);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
 
     </script>

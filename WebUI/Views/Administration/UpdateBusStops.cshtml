@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "UpdateBusStops";
+    ViewBag.Title = "Редактирование автобусных остановок";
 }
 
 <h2 align="center">Редактирование автобусных остановок</h2>
@@ -15,12 +15,13 @@
     @Html.DropDownListFor(d => d.Id, Model.BusStops, new {@class = "form-control", id="selectStop" })
 </div>
 
-<form class="form-horizontal">
+<form class="form-horizontal" id="updateForm">
     <div class="well" id="fields">
         @Html.HiddenFor(h=>h.Id)
         <div class="form-group">
             @Html.LabelFor(l => l.Name, new {@class = "col-md-1 control-label"})
             <div class="col-md-2">
+                @Html.ValidationMessageFor(t => t.Name)
                 @Html.TextBoxFor(t => t.Name, new {@class = "form-control"})
             </div>
             @Html.LabelFor(l => l.Description, new {@class = "col-md-1 control-label"})
@@ -29,10 +30,12 @@
             </div>
             @Html.LabelFor(l => l.Latitude, new {@class = "col-md-1 control-label"})
             <div class="col-md-2">
+                @Html.ValidationMessageFor(t => t.Latitude)
                 @Html.TextBoxFor(t => t.Latitude, new {@class = "form-control"})
             </div>
             @Html.LabelFor(l => l.Longitude, new {@class = "col-md-1 control-label"})
             <div class="col-md-2">
+                @Html.ValidationMessageFor(t => t.Longitude)
                 @Html.TextBoxFor(t => t.Longitude, new {@class = "form-control"})
             </div>
         </div>
@@ -65,27 +68,31 @@
         $('#selectStop').change();
 
         $('#editBtn').on('click',
-            function() {
-                $.ajax({
-                    url: '/Administration/SaveChangeBusStop',
-                    type: 'POST',
-                    data: {
-                        Id: $('#Id').val(),
-                        Name: $('#Name').val(),
-                        Description: $('#Description').val(),
-                        Latitude: $('#Latitude').val().replace('.', ','),
-                        Longitude: $('#Longitude').val().replace('.', ',')
-                    },
-                    success: function(data) {
-                        if (data.Successed) {
-                            alertify.success('Данные успешно изменены.', 3, function () {
-                                location.reload();
-                            });
-                        } else {
-                            alertify.error('Данные не сохранены! ' + data.Message);
+            function () {
+
+                if ($('#updateForm').valid()) {
+                    $.ajax({
+                        url: '/Administration/SaveChangeBusStop',
+                        type: 'POST',
+                        data: {
+                            Id: $('#Id').val(),
+                            Name: $('#Name').val(),
+                            Description: $('#Description').val(),
+                            Latitude: $('#Latitude').val().replace('.', ','),
+                            Longitude: $('#Longitude').val().replace('.', ',')
+                        },
+                        success: function(data) {
+                            if (data.Successed) {
+                                alertify.success('Данные успешно изменены.', 3, function () {
+                                    location.reload();
+                                });
+                            } else {
+                                alertify.error('Данные не сохранены! ' + data.Message);
+                            }
                         }
-                    }
-                });
+                    });
+
+                }
             });
 
     </script>

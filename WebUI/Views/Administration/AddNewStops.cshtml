@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "AddNewStops";
+    ViewBag.Title = "Добавление автобусных остановок";
 }
 
 <h2 align="center">Добавление новых автобусных остановок</h2>
@@ -14,6 +14,7 @@
             <div class="form-group">
                 @Html.LabelFor(l => l.BusStops[0].Name, new {@class = "col-md-1 control-label"})
                 <div class="col-md-2">
+                    @Html.ValidationMessageFor(t => t.BusStops[0].Name)
                     @Html.TextBoxFor(t => t.BusStops[0].Name, new {@class = "form-control"})
                 </div>
                 @Html.LabelFor(l => l.BusStops[0].Description, new {@class = "col-md-1 control-label"})
@@ -22,10 +23,12 @@
                 </div>
                 @Html.LabelFor(l => l.BusStops[0].Latitude, new {@class = "col-md-1 control-label"})
                 <div class="col-md-2">
+                    @Html.ValidationMessageFor(t => t.BusStops[0].Latitude)
                     @Html.TextBoxFor(t => t.BusStops[0].Latitude, new {@class = "form-control"})
                 </div>
                 @Html.LabelFor(l => l.BusStops[0].Longitude, new {@class = "col-md-1 control-label"})
                 <div class="col-md-2">
+                    @Html.ValidationMessageFor(t => t.BusStops[0].Longitude)
                     @Html.TextBoxFor(t => t.BusStops[0].Longitude, new {@class = "form-control"})
                 </div>
             </div>

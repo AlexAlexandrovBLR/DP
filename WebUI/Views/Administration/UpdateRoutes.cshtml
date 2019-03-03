@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "UpdateRoutes";
+    ViewBag.Title = "Редактирование маршрутов";
 }
 
 <h2 align="center">Редактирование маршрутов</h2>
@@ -39,7 +39,8 @@
         @Html.LabelFor(l => l.RouteNumber, new {@class = "col-md-4 control-label"})
         <div class="col-md-4">
             <div class="input-group">
-                @Html.TextBoxFor(t => t.RouteNumber, new {@class = "form-control"})
+                @Html.ValidationMessageFor(t => t.RouteNumber)
+                @Html.TextBoxFor(t => t.RouteNumber, new { @class = "form-control" })
             </div>
         </div>
     </div>
@@ -47,6 +48,7 @@
         @Html.LabelFor(l => l.NumberOfSeats, new {@class = "col-md-4 control-label"})
         <div class="col-md-4">
             <div class="input-group">
+                @Html.ValidationMessageFor(t => t.NumberOfSeats)
                 @Html.TextBoxFor(t => t.NumberOfSeats, new {@class = "form-control"})
             </div>
         </div>
@@ -56,6 +58,7 @@
         @Html.LabelFor(l => l.Price, new {@class = "col-md-4 control-label"})
         <div class="col-md-4">
             <div class="input-group">
+                @Html.ValidationMessageFor(t => t.Price)
                 @Html.TextBoxFor(t => t.Price, new {@class = "form-control"})
             </div>
         </div>
@@ -100,22 +103,24 @@
             function(e) {
                 e.preventDefault();
 
-                $.ajax({
-                    url: '/Administration/SaveChangesRoute',
-                    method: 'POST',
-                    data: $(this).serialize(),
-                    success: function(data) {
-                        if (data.Successed) {
-                            alertify.success('Данные успешно изменены.',
-                                3,
-                                function() {
-                                    location.reload();
-                                });
-                        } else {
-                            alertify.error('Данные не сохранены! ' + data.Message);
+                if ($('#editForm').valid()) {
+                    $.ajax({
+                        url: '/Administration/SaveChangesRoute',
+                        method: 'POST',
+                        data: $(this).serialize(),
+                        success: function(data) {
+                            if (data.Successed) {
+                                alertify.success('Данные успешно изменены.',
+                                    3,
+                                    function() {
+                                        location.reload();
+                                    });
+                            } else {
+                                alertify.error('Данные не сохранены! ' + data.Message);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
 
 
